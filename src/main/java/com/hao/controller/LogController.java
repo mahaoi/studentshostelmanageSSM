@@ -32,7 +32,7 @@ public class LogController {
     public String loginController(Student student){
         //0：登陆成功  1：登陆失败
         Student findstudent = logService.findStudent(student);
-        System.out.println(findstudent + "====" + student);
+        System.out.println(findstudent + "==登录判断==" + student);
         if (findstudent == null){
             return "1";
         }

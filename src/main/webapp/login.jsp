@@ -9,7 +9,7 @@
 --%>
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <title>Login</title>
+    <title>User Login</title>
 </head>
 <script>
     $(function () {
@@ -47,6 +47,7 @@
         姓名：<input type="text" name="username" id="username"/><br/>
         密码：<input type="password" name="password" id="password"/><br/>
         <span id="null-username-password"></span><br/>
+        <a href="register.jsp">还没有账号，去注册！</a><br/>
         <input type="submit" id="login" value="Sign in"/><br/>
     </from>
 </div>
