@@ -26,6 +26,13 @@
   </properties>
 
   <dependencies>
+    <!--  getter和setter插件  -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.6</version>
+    </dependency>
+    <!--  json  -->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>

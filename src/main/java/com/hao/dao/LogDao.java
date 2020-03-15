@@ -1,9 +1,12 @@
 package com.hao.dao;
 
+import com.hao.domain.Room;
 import com.hao.domain.Student;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author guoguo
@@ -23,4 +26,12 @@ public interface LogDao {
     // 保存用户信息
     @Insert("insert into student (username,password,phone) values (#{username},#{password},#{phone})")
     public void saveStudent(Student student);
+
+    //查询所有
+    @Select("select * from student")
+    public List<Student> findAll();
+
+    //查询有剩余床位的宿舍号
+    @Select("select * from room")
+    public List<Room> updateRoom();
 }
