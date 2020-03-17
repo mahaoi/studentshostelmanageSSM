@@ -26,6 +26,11 @@
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20090211</version>
+    </dependency>
     <!--  getter和setter插件  -->
     <dependency>
       <groupId>org.projectlombok</groupId>

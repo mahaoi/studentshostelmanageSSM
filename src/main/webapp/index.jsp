@@ -53,16 +53,25 @@
 <div id="nav">
     <ul>
         <li>
-            <a href="login.jsp">Sign in</a>
+            <a href="index.jsp">Home</a>
         </li>
         <li>
-            <a onclick="showTable()">Student List</a>
+            <a onclick="showStudentTable()">Student Info</a>
+        </li>
+        <li>
+            <a onclick="showRoomTable()">Room Info</a>
+        </li>
+        <li>
+            <a onclick="rs()">test</a>
         </li>
         <li>
             <a href="testlist.jsp">page</a>
         </li>
         <li>
             <a href="tan.jsp">tanchuang</a>
+        </li>
+        <li>
+            <a href="login.jsp">Sign in</a>
         </li>
     </ul>
 </div>
@@ -72,11 +81,15 @@
         <%--  显示logo  --%>
         <img src="images/8.png" width="100%"/>
     </div>
-    <div id="showTable" style="display: none;"><%--  显示表格数据  --%></div>
+    <div id="showStudentTable" style="display: none;"><%--  显示学生数据  --%></div>
+    <div id="showRoomTable" style="display: none;"><%--  显示宿舍数据  --%></div>
 </div>
 <%--下边版权信息--%>
 <div id="footer">
-    Copyright ? 2020 果果妞妞
+    Copyright ? 2020 <a onclick="playBgm()">果果妞妞</a>
 </div>
+<%--<audio id="voice" src="music/bgm.mp3"></audio>--%>
+<%--<embed src="bgm,mp3" autostar="true" hidden="true"/>--%>
+<%--<embed src="musics/bgm.mp3" hidden="true" autostart="true" loop="true">--%>
 </body>
 </html>
