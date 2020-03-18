@@ -1,0 +1,30 @@
+/*index页面头部，侧边和下边样式*/
+#header {
+    background-color:white;
+    color:white;
+    padding:5px;
+}
+#nav {
+    line-height:50px;
+    background-color:#eeeeee;
+    height:570px;
+    width:220px;
+    text-align:center;
+    float:left;
+    padding:5px;
+}
+#section {
+    width:1200px;
+    float:left;
+    padding:10px;
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+html,body{width:100% }
+
+.clkFontColor {color: #8734ff}
