@@ -48,10 +48,64 @@
 <a id="testtan">分配宿舍</a>
 <div class="wrap-box" id="dia" style="display: none;"><!--最外层包裹框，背景图片很鲜艳亮眼position:fixed-->
     <div class='login-box'><!--登录表单框部分position:fixed-->
-<%--        <button id="btu">获取可分配宿舍号</button><br/>--%>
         <select id="updateRoom" style="margin-left: 200px;">
             <option>请选择宿舍号</option>
         </select>
+        <table border="0" style="margin-left: 150px;">
+            <thead align="center">
+            <tr>
+                <th colspan="2">================</th>
+            </tr>
+            <tr>
+                <th colspan="2">宿舍入住详情</th>
+            </tr>
+            <tr>
+                <th colspan="2">================</th>
+            </tr>
+            <tr>
+                <td>宿舍:8#307</td>
+                <td>已入住3人</td>
+            </tr>
+            <tr>
+                <th colspan="2">----------------------------</th>
+            </tr>
+            <tr>
+                <td>学号</td>
+                <td>姓名</td>
+            </tr>
+            <tr>
+                <th colspan="2">----------------------------</th>
+            </tr>
+            </thead>
+
+            <tfoot align="center">
+            <tr>
+                <th colspan="2">----------------------------</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button>确定</button></td>
+            </tr>
+            <tr>
+                <th colspan="2">================</th>
+            </tr>
+            </tfoot>
+
+            <tbody align="center">
+            <tr>
+                <td>201796104017</td>
+                <td>马浩</td>
+            </tr>
+            <tr>
+                <td>201796104018</td>
+                <td>马小浩</td>
+            </tr>
+            <tr>
+                <td>201796104016</td>
+                <td>小浩</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

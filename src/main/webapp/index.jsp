@@ -10,36 +10,8 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="js/main.js"></script>
+    <link type="text/css" rel="styleSheet"  href="css/main.css" />
     <title>Students Hostel Manage</title>
-    <style>
-        #header {
-            background-color:white;
-            color:white;
-            padding:5px;
-        }
-        #nav {
-            line-height:50px;
-            background-color:#eeeeee;
-            height:570px;
-            width:220px;
-            text-align:center;
-            float:left;
-            padding:5px;
-        }
-        #section {
-            width:1200px;
-            float:left;
-            padding:10px;
-        }
-        #footer {
-            background-color:black;
-            color:white;
-            clear:both;
-            text-align:center;
-            padding:5px;
-        }
-        html,body{width:100% }
-    </style>
 </head>
 <body>
 <%--头部导航栏--%>
@@ -56,13 +28,13 @@
             <a href="index.jsp">Home</a>
         </li>
         <li>
-            <a onclick="showStudentTable()">Student Info</a>
+            <a onclick="showStudentTable()" id="stuInfo">Student Info</a>
         </li>
         <li>
-            <a onclick="showRoomTable()">Room Info</a>
+            <a onclick="showRoomTable()" id="roomInfo">Room Info</a>
         </li>
         <li>
-            <a onclick="rs()">test</a>
+            <a>test</a>
         </li>
         <li>
             <a href="testlist.jsp">page</a>
@@ -83,6 +55,33 @@
     </div>
     <div id="showStudentTable" style="display: none;"><%--  显示学生数据  --%></div>
     <div id="showRoomTable" style="display: none;"><%--  显示宿舍数据  --%></div>
+    <div class="wrap-box" id="dia" style="display: none;"><!--最外层包裹框，背景图片很鲜艳亮眼position:fixed-->
+        <div class='login-box'><!--表单框部分position:fixed-->
+            <table border="0" style="margin-left: 150px;">
+                <thead align="center">
+                    <tr><th colspan="2">================</th></tr>
+                    <tr><th colspan="2">宿舍入住详情</th></tr>
+                    <tr><th colspan="2">================</th></tr>
+                    <tr>
+                        <td id="roomId"></td>
+                        <td id="roomIn"></td>
+                    </tr>
+                    <tr><th colspan="2">----------------------------</th></tr>
+                    <tr>
+                        <td>学号</td>
+                        <td>姓名</td>
+                    </tr>
+                    <tr><th colspan="2">----------------------------</th></tr>
+                </thead>
+                <tfoot align="center">
+                    <tr><th colspan="2">----------------------------</th></tr>
+                    <tr><td></td><td><a id="ok" style="color: aqua">确定</a></td></tr>
+                    <tr><th colspan="2">================</th></tr>
+                </tfoot>
+                <tbody align="center" id="roomInfoBody"></tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <%--下边版权信息--%>
 <div id="footer">
@@ -93,3 +92,36 @@
 <%--<embed src="musics/bgm.mp3" hidden="true" autostart="true" loop="true">--%>
 </body>
 </html>
+<style type="text/css">
+    #dia
+    {
+        clear: left;
+        float: left;
+        background: rgba(0,0,0,0.5);
+        z-index: 200;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 500px;
+        height: 400px;
+        margin: -200px 0 0 -250px;
+        border-radius: 10px;
+        border-top-width: 10px;
+        padding: 10px 10px 10px 10px;
+    }
+
+    .login-box::before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        filter:blur(10px) contrast(.8);
+        z-index:-1;
+    }
+
+    .wrap-box ,.login-box::before{
+        background:url('images/bg.jpg') 0 / cover fixed;
+    }
+</style>

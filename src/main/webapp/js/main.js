@@ -2,7 +2,8 @@
  * 显示学生数据
  */
 function showStudentTable() {
-    hide();
+    $("#stuInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
+    hideAll();//调用方法隐藏所有盒子
     //清空盒子
     $("#showStudentTable").empty();
     $("#showStudentTable").css("display","block");
@@ -59,7 +60,7 @@ function del(id) {
             }
         });
     }
-    showTable();
+    showStudentTable();
 }
 /**
  * 更新学生信息
@@ -81,7 +82,8 @@ function up(id) {
  * 显示宿舍数据
  */
 function showRoomTable() {
-    hide();
+    $("#roomInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
+    hideAll();//调用方法隐藏所有盒子
     //清空盒子
     $("#showRoomTable").empty();
     $("#showRoomTable").css("display","block");
@@ -94,6 +96,7 @@ function showRoomTable() {
         "        <th>剩余入住人数</th>\n" +
         "        <th>密码</th>\n" +
         "        <th>备注</th>\n" +
+        "        <th>操作</th>\n" +
         "    </tr>\n" +
         "    </thead>\n" +
         "    <tbody id=\"roomlist\">\n" +
@@ -118,7 +121,7 @@ function showRoomTable() {
                     "<td>" + value.surplus + "</td>" +
                     "<td>" + value.password + "</td>" +
                     "<td>" + value.remarks + "</td>" +
-                    "<td><button onclick='moreInfo("+value.roomid+")'>详情</button><button onclick='updata("+value.id+")'>更新</button><button onclick='delete("+value.id+")'>删除</button></td></tr>";
+                    "<td><button onclick='moreInfo(\""+value.roomid+"\")'>详情</button><button onclick='update("+value.roomid+")'>更新</button><button onclick='delete("+value.id+")'>删除</button></td></tr>";
                 $("#roomlist").append(trs);
                 //设置文本居中
                 $("th,td").css("text-align","center");
@@ -131,46 +134,54 @@ function showRoomTable() {
  * 显示宿舍入住详情
  */
 function moreInfo(roomid) {
-    alert(roomid);
+    //弹出div
+    var dia = document.getElementById('dia');
+    dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
+    //清楚无用子节点
+    $("#roomInfoBody").empty();
+    //查询宿舍具体信息
     $.ajax({
         url : "room_stu/findAllStu",
         type : "post",
-        dataType : "json",
         data : {
             roomid : roomid
         },
-        success : function(result) {
-            console.log(result);
-        },
-        error : function () {
-            alert("error");
-        }
-    });
-}
-
-
-
-
-
-
-
-
-function rs() {
-    $.ajax({
-        url : "room_stu/findAllStu",
-        type : "post",
         dataType : "json",
-        data : {
-            roomid : "8#307"
-        },
         success : function(result) {
-            console.log(result);
+            //设置清单头部信息  宿舍编号和宿舍已入住人数
+            $("#roomId").text("宿舍:"+roomid);
+            $("#roomIn").text("已入住"+result.length+"人");
+            $.each(result, function (n, value) {
+                // alert(n + ' ' + value);
+                var students = value.studentInfos;
+                moreInfo2(students);
+                console.log(students);
+            });
         },
         error : function () {
             alert("error");
         }
     });
 }
+function moreInfo2(result) {
+    $.each(result, function (n, value) {
+        // alert(n + ' ' + value);
+        var trs = "<tr><td>" + value.id + "</td><td>"+value.name+"</td></tr>";
+        $("#roomInfoBody").append(trs);
+    });
+    $("#ok").click(function () {
+        var dia = document.getElementById('dia');
+        dia.style.display = 'none';
+    });
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -193,7 +204,7 @@ function rs() {
 /**
  * 隐藏所有盒子
  */
-function hide() {
+function hideAll() {
     $("#showLogo").css("display","none");
     $("#showStudentTable").css("display","none");
     $("#showRoomTable").css("display","none");
