@@ -24,5 +24,8 @@ public class RoomServiceImpl implements RoomService {
         return roomDao.findAll();
     }
 
-
+    @Override
+    public void delRoom(String roomid) {
+        roomDao.delRoom(roomid);
+    }
 }

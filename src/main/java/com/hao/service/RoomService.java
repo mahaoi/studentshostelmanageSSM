@@ -14,4 +14,6 @@ public interface RoomService {
     //查询所有
     List<RoomInfo> findAll();
 
+    //删除宿舍
+    void delRoom(String roomid);
 }

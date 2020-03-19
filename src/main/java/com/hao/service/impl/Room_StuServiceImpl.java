@@ -28,4 +28,9 @@ public class Room_StuServiceImpl implements Room_StuService {
     public Integer stuCount(String roomid) {
         return room_stuDao.stuCount(roomid);
     }
+
+    @Override
+    public String findRoomidById(String id) {
+        return room_stuDao.findRoomidById(id);
+    }
 }

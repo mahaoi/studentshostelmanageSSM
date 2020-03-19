@@ -1,6 +1,7 @@
 package com.hao.dao;
 
 import com.hao.domain.RoomInfo;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +18,7 @@ public interface RoomDao {
     @Select("select * from roominfo")
     List<RoomInfo> findAll();
 
-
+    //删除宿舍
+    @Delete("delete from roominfo where roomid = #{roomid}")
+    void delRoom(String roomid);
 }

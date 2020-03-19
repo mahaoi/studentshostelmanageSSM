@@ -15,4 +15,7 @@ public interface Room_StuService {
 
     //每个宿舍已入住人数
     Integer stuCount(String roomid);
+
+    //查询宿舍号
+    String findRoomidById(String id);
 }

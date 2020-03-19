@@ -3,6 +3,7 @@ package com.hao.dao;
 import com.hao.domain.StudentInfo;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +26,8 @@ public interface StuDao {
     //删除
     @Delete("delete from studentinfo where id = #{id}")
     void delById(String id);
+
+    //更新学生状态
+    @Update("update studentinfo set state = #{state} where id = #{id}")
+    void upState(String state,String id);
 }

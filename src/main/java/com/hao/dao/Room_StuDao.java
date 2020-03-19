@@ -29,4 +29,8 @@ public interface Room_StuDao {
     //每个宿舍已入住人数
     @Select("select count(*) from room_stu where roomid=#{roomid}")
     Integer stuCount(String roomid);
+
+    //查询宿舍号
+    @Select("select roomid from room_stu where id=#{id}")
+    String findRoomidById(String id);
 }

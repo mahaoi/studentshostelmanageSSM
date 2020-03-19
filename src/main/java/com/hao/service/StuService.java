@@ -15,4 +15,7 @@ public interface StuService {
 
     //删除
     void delById(String id);
+
+    //更新学生状态
+    void upState(String state,String id);
 }

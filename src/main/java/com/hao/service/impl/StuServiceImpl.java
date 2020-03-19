@@ -29,4 +29,9 @@ public class StuServiceImpl implements StuService {
         //根据学号删除
         stuDao.delById(id);
     }
+
+    @Override
+    public void upState(String state, String id) {
+        stuDao.upState(state,id);
+    }
 }

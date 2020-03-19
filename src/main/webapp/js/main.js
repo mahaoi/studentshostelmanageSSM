@@ -16,6 +16,8 @@ function showStudentTable() {
         "        <th>专业</th>\n" +
         "        <th>班级</th>\n" +
         "        <th>电话</th>\n" +
+        "        <th>状态</th>\n" +
+        "        <th>宿舍</th>\n" +
         "        <th>操作</th>\n" +
         "    </tr>\n" +
         "    </thead>\n" +
@@ -32,12 +34,23 @@ function showStudentTable() {
             console.log(result);
             $.each(result, function (n, value) {
                 // alert(n + ' ' + value);
+                var state = "";
+                if (value.state == '0'){
+                    state = "<td style='color: #8734ff'>已分配</td>";
+                } else {
+                    state = "<td style='color: #ff3333'>未分配</td>";
+                }
+                var roomid = value.roomid;
+                if (!value.roomid){
+                    roomid = "NULL";
+                }
                 var trs = "<tr><td>" + value.id + "</td>" +
                             "<td>" + value.name + "</td>" +
                             "<td>" + value.sex + "</td>" +
                             "<td>" + value.major + "</td>" +
                             "<td>" + value.classes + "</td>" +
-                            "<td>" + value.phone + "</td>" +
+                            "<td>" + value.phone + "</td>" + state +
+                            "<td>" + roomid + "</td>" +
                             "<td><button onclick='up("+value.id+")'>更新</button><button onclick='del("+value.id+")'>删除</button></td></tr>";
                 $("#stulist").append(trs);
                 //设置文本居中
@@ -57,10 +70,10 @@ function del(id) {
             data : {id : id},
             success : function() {
                 alert("删除成功！");
+                showStudentTable();
             }
         });
     }
-    showStudentTable();
 }
 /**
  * 更新学生信息
@@ -121,7 +134,7 @@ function showRoomTable() {
                     "<td>" + value.surplus + "</td>" +
                     "<td>" + value.password + "</td>" +
                     "<td>" + value.remarks + "</td>" +
-                    "<td><button onclick='moreInfo(\""+value.roomid+"\")'>详情</button><button onclick='update("+value.roomid+")'>更新</button><button onclick='delete("+value.id+")'>删除</button></td></tr>";
+                    "<td><button onclick='moreInfo(\""+value.roomid+"\")'>详情</button><button onclick='update("+value.roomid+")'>更新</button><button onclick='delRoom(\""+value.roomid+"\")'>删除</button></td></tr>";
                 $("#roomlist").append(trs);
                 //设置文本居中
                 $("th,td").css("text-align","center");
@@ -129,7 +142,6 @@ function showRoomTable() {
         }
     });
 }
-
 /**
  * 显示宿舍入住详情
  */
@@ -152,10 +164,16 @@ function moreInfo(roomid) {
             $("#roomId").text("宿舍:"+roomid);
             $("#roomIn").text("已入住"+result.length+"人");
             $.each(result, function (n, value) {
-                // alert(n + ' ' + value);
-                var students = value.studentInfos;
-                moreInfo2(students);
-                console.log(students);
+                if (value == ""){
+                    $("#ok").click(function () {
+                        var dia = document.getElementById('dia');
+                        dia.style.display = 'none';
+                    });
+                } else {
+                    var students = value.studentInfos;
+                    moreInfo2(students);
+                    console.log(students);
+                }
             });
         },
         error : function () {
@@ -166,7 +184,7 @@ function moreInfo(roomid) {
 function moreInfo2(result) {
     $.each(result, function (n, value) {
         // alert(n + ' ' + value);
-        var trs = "<tr><td>" + value.id + "</td><td>"+value.name+"</td></tr>";
+        var trs = "<tr><td>" + value.id + "</td><td>" + value.major + "</td><td>"+value.name+"</td></tr>";
         $("#roomInfoBody").append(trs);
     });
     $("#ok").click(function () {
@@ -174,9 +192,59 @@ function moreInfo2(result) {
         dia.style.display = 'none';
     });
 }
-
-
-
+/**
+ * 删除宿舍
+ */
+function delRoom(roomid) {
+    if(confirm("宿舍删除后，宿舍内人员信息将会丢失，确定继续吗？")){
+        $.ajax({
+            url : "room/del",
+            type : "post",
+            data : {roomid : roomid},
+            success : function() {
+                showRoomTable();
+                // getDelRoomStuInfo(roomid);
+            }
+        });
+    }
+}
+// function getDelRoomStuInfo(roomid) {
+//     //获取删除宿舍中的学生信息
+//     $.ajax({
+//         url : "room_stu/findAllStu",
+//         type : "post",
+//         data : {
+//             roomid : roomid
+//         },
+//         dataType : "json",
+//         success : function(result) {
+//             console.log(result);//空的（拿不到值）
+//             $.each(result, function (n, value) {
+//                 var students = value.studentInfos;
+//                 delRoomStu(students);
+//             });
+//         },
+//         error : function () {
+//             alert("getDelRoomStuInfo")
+//         }
+//     });
+// }
+// function delRoomStu(result) {
+//     //更新删除宿舍中的学生状态
+//     $.each(result, function (n, value) {
+//         $.ajax({
+//             url : "stu/upstate",
+//             type : "post",
+//             data : {state : "1" , id : value.id},
+//             success : function() {
+//                 alert("删除成功！");
+//             },
+//             error : function () {
+//                 alert("delRoomStu")
+//             }
+//         });
+//     });
+// }
 
 
 
@@ -211,10 +279,21 @@ function hideAll() {
 }
 
 /**
- * 彩蛋：点击果果妞妞播放bgm
+ * 彩蛋：鼠标移动到果果妞妞播放bgm
  */
-function playBgm() {
-    $("#voice").play();
+function caiDan() {
+    var trigger = null;
+    var audio= new Audio("musics/bgm.wav");
+    $("#caiDan").hover(function(){
+        trigger = setTimeout(function(){
+            audio.play();
+        },6000);
+    },function(){
+        clearTimeout(trigger);
+        audio.pause();
+    });
 }
+
+
 
 

@@ -49,34 +49,37 @@
 </div>
 <%--信息显示的盒子--%>
 <div id="section">
-    <div id="showLogo" style="display: block;">
-        <%--  显示logo  --%>
-        <img src="images/8.png" width="100%"/>
-    </div>
-    <div id="showStudentTable" style="display: none;"><%--  显示学生数据  --%></div>
-    <div id="showRoomTable" style="display: none;"><%--  显示宿舍数据  --%></div>
+    <%--  显示logo  --%>
+    <div id="showLogo" style="display: block;"><img src="images/8.png" width="100%"/></div>
+    <%--  显示学生数据  --%>
+    <div id="showStudentTable" style="display: none;"></div>
+    <%--  显示宿舍数据  --%>
+    <div id="showRoomTable" style="display: none;"></div>
+    <%--  宿舍详情弹窗  --%>
     <div class="wrap-box" id="dia" style="display: none;"><!--最外层包裹框，背景图片很鲜艳亮眼position:fixed-->
         <div class='login-box'><!--表单框部分position:fixed-->
-            <table border="0" style="margin-left: 150px;">
+            <table border="0" style="margin-left: 90px;">
                 <thead align="center">
-                    <tr><th colspan="2">================</th></tr>
-                    <tr><th colspan="2">宿舍入住详情</th></tr>
-                    <tr><th colspan="2">================</th></tr>
+                    <tr><th colspan="3">==========================</th></tr>
+                    <tr><th colspan="3">宿舍入住详情</th></tr>
+                    <tr><th colspan="3">==========================</th></tr>
                     <tr>
                         <td id="roomId"></td>
+                        <td></td>
                         <td id="roomIn"></td>
                     </tr>
-                    <tr><th colspan="2">----------------------------</th></tr>
+                    <tr><th colspan="3">----------------------------------------------</th></tr>
                     <tr>
                         <td>学号</td>
+                        <td>专业</td>
                         <td>姓名</td>
                     </tr>
-                    <tr><th colspan="2">----------------------------</th></tr>
+                    <tr><th colspan="3">----------------------------------------------</th></tr>
                 </thead>
                 <tfoot align="center">
-                    <tr><th colspan="2">----------------------------</th></tr>
-                    <tr><td></td><td><a id="ok" style="color: aqua">确定</a></td></tr>
-                    <tr><th colspan="2">================</th></tr>
+                    <tr><th colspan="3">----------------------------------------------</th></tr>
+                    <tr><td></td><td></td><td><a id="ok" style="color: aqua">确定</a></td></tr>
+                    <tr><th colspan="3">==========================</th></tr>
                 </tfoot>
                 <tbody align="center" id="roomInfoBody"></tbody>
             </table>
@@ -85,13 +88,16 @@
 </div>
 <%--下边版权信息--%>
 <div id="footer">
-    Copyright ? 2020 <a onclick="playBgm()">果果妞妞</a>
+    Copyright ? 2020 <a id="caiDan">果果妞妞</a>
 </div>
-<%--<audio id="voice" src="music/bgm.mp3"></audio>--%>
-<%--<embed src="bgm,mp3" autostar="true" hidden="true"/>--%>
-<%--<embed src="musics/bgm.mp3" hidden="true" autostart="true" loop="true">--%>
+<script>
+    $("#caiDan").focus(caiDan());
+</script>
 </body>
 </html>
+
+
+
 <style type="text/css">
     #dia
     {

@@ -2,6 +2,7 @@ package com.hao.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.hao.domain.RoomInfo;
+import com.hao.domain.Room_Stu;
 import com.hao.service.RoomService;
 import com.hao.service.Room_StuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,4 +52,10 @@ public class RoomController {
         return JSON.toJSON(objectList).toString();
     }
 
+    //删除宿舍
+    @RequestMapping("/del")
+    public void delRoom(String roomid){
+        //删除宿舍
+        roomService.delRoom(roomid);
+    }
 }
