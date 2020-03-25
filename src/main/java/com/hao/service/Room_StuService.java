@@ -18,4 +18,5 @@ public interface Room_StuService {
 
     //查询宿舍号
     String findRoomidById(String id);
+
 }

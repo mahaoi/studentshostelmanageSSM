@@ -7,7 +7,8 @@ function showStudentTable() {
     //清空盒子
     $("#showStudentTable").empty();
     $("#showStudentTable").css("display","block");
-    var tablehead = "<table width='100%'>\n" +
+    var tablehead = "<input type='text' id='findBy' placeholder='请输入查询内容'/>" +
+        "<table width='100%'>\n" +
         "    <thead>\n" +
         "    <tr>\n" +
         "        <th>学号</th>\n" +
@@ -25,9 +26,8 @@ function showStudentTable() {
         "    </tbody>\n" +
         "</table>";
     $("#showStudentTable").append(tablehead);
-    //请求数据
     $.ajax({
-        url : "stu/findall",
+        url : "stu/findAll",
         type : "get",
         dataType : "json",
         success : function(result) {
@@ -45,18 +45,25 @@ function showStudentTable() {
                     roomid = "NULL";
                 }
                 var trs = "<tr><td>" + value.id + "</td>" +
-                            "<td>" + value.name + "</td>" +
-                            "<td>" + value.sex + "</td>" +
-                            "<td>" + value.major + "</td>" +
-                            "<td>" + value.classes + "</td>" +
-                            "<td>" + value.phone + "</td>" + state +
-                            "<td>" + roomid + "</td>" +
-                            "<td><button onclick='up("+value.id+")'>更新</button><button onclick='del("+value.id+")'>删除</button></td></tr>";
+                    "<td>" + value.name + "</td>" +
+                    "<td>" + value.sex + "</td>" +
+                    "<td>" + value.major + "</td>" +
+                    "<td>" + value.classes + "</td>" +
+                    "<td>" + value.phone + "</td>" + state +
+                    "<td>" + roomid + "</td>" +
+                    "<td><button onclick='up("+value.id+")'>更新</button><button onclick='del("+value.id+")'>删除</button></td></tr>";
                 $("#stulist").append(trs);
                 //设置文本居中
                 $("th,td").css("text-align","center");
             });
         }
+    });
+    //通过输入框输入内容过滤表格
+    $('#findBy').on('input propertychange', function() {
+        console.log( $(this).val());
+        $('table tbody tr').hide()
+            .filter(":contains('" + ($(this).val()) + "')")
+            .show();
     });
 }
 /**
@@ -100,7 +107,8 @@ function showRoomTable() {
     //清空盒子
     $("#showRoomTable").empty();
     $("#showRoomTable").css("display","block");
-    var tablehead = "<table width='100%'>\n" +
+    var tablehead = "<input type='text' id='findBy' placeholder='请输入查询内容'/>" +
+        "<table width='100%'>\n" +
         "    <thead>\n" +
         "    <tr>\n" +
         "        <th>宿舍编号</th>\n" +
@@ -140,6 +148,13 @@ function showRoomTable() {
                 $("th,td").css("text-align","center");
             });
         }
+    });
+    //通过输入框输入内容过滤表格
+    $('#findBy').on('input propertychange', function() {
+        console.log( $(this).val());
+        $('table tbody tr').hide()
+            .filter(":contains('" + ($(this).val()) + "')")
+            .show();
     });
 }
 /**
@@ -203,6 +218,7 @@ function delRoom(roomid) {
             data : {roomid : roomid},
             success : function() {
                 showRoomTable();
+                f(roomid);
                 // getDelRoomStuInfo(roomid);
             }
         });
@@ -247,11 +263,84 @@ function delRoom(roomid) {
 // }
 
 
+/**
+ * 未分配宿舍学生名单
+ */
+function UnallocatedStudentTable() {
+    $("#unallocatedSyu").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
+    hideAll();//调用方法隐藏所有盒子
+    //清空盒子
+    $("#showUnallocatedStuTable").empty();
+    $("#showUnallocatedStuTable").css("display","block");
+    var tablehead = "<table width='100%'>\n" +
+        "    <thead>\n" +
+        "    <tr>\n" +
+        "        <th>学号</th>\n" +
+        "        <th>姓名</th>\n" +
+        "        <th>性别</th>\n" +
+        "        <th>专业</th>\n" +
+        "        <th>班级</th>\n" +
+        "        <th>电话</th>\n" +
+        "        <th>状态</th>\n" +
+        "        <th>操作</th>\n" +
+        "    </tr>\n" +
+        "    </thead>\n" +
+        "    <tbody id=\"unStulist\">\n" +
+        "    </tbody>\n" +
+        "</table>";
+    $("#showUnallocatedStuTable").append(tablehead);
+    //请求数据
+    $.ajax({
+        url : "stu/findByState",
+        type : "post",
+        data : {
+            state : "1"
+        },
+        dataType : "json",
+        success : function(result) {
+            console.log(result);
+            $.each(result, function (n, value) {
+                var trs = "<tr><td>" + value.id + "</td>" +
+                    "<td>" + value.name + "</td>" +
+                    "<td>" + value.sex + "</td>" +
+                    "<td>" + value.major + "</td>" +
+                    "<td>" + value.classes + "</td>" +
+                    "<td>" + value.phone + "</td>" +
+                    "<td style='color: #ff3333'>未分配</td>" +
+                    "<td><button onclick='checkIn("+value.id+")'>分配</button></td></tr>";
+                $("#unStulist").append(trs);
+                //设置文本居中
+                $("th,td").css("text-align","center");
+            });
+        }
+    });
+}
 
-
-
-
-
+/**
+ * 宿舍分配
+ */
+function checkIn(id) {
+    //弹出div
+    var dia = document.getElementById('diaStu');
+    dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
+    //清楚无用子节点
+    $("#updateRoom").empty().append("<option>请选择宿舍号</option>");
+    //查询拥有空床位的宿舍号
+    $.ajax({
+        url : "room/checkIn",
+        type : "get",
+        dataType : "json",
+        success : function(result) {
+            $.each(result, function (n, value) {
+                var trs = "<option value='" + value.roomid + "'>" + value.roomid + "</option>";
+                $("#updateRoom").append(trs);
+            });
+        },
+        error : function () {
+            alert("error");
+        }
+    });
+}
 
 
 
@@ -276,6 +365,7 @@ function hideAll() {
     $("#showLogo").css("display","none");
     $("#showStudentTable").css("display","none");
     $("#showRoomTable").css("display","none");
+    $("#showUnallocatedStuTable").css("display","none");
 }
 
 /**
@@ -283,7 +373,7 @@ function hideAll() {
  */
 function caiDan() {
     var trigger = null;
-    var audio= new Audio("musics/bgm.wav");
+    var audio= new Audio("musics/bgm.mp3");
     $("#caiDan").hover(function(){
         trigger = setTimeout(function(){
             audio.play();
@@ -291,6 +381,7 @@ function caiDan() {
     },function(){
         clearTimeout(trigger);
         audio.pause();
+        audio.currentTime = 0;
     });
 }
 

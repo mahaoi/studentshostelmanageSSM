@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%--
@@ -10,6 +11,7 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/Gl.js"></script>
     <link type="text/css" rel="styleSheet"  href="css/main.css" />
     <title>Students Hostel Manage</title>
 </head>
@@ -34,7 +36,7 @@
             <a onclick="showRoomTable()" id="roomInfo">Room Info</a>
         </li>
         <li>
-            <a>test</a>
+            <a onclick="UnallocatedStudentTable()" id="unallocatedSyu">Unallocated Student</a>
         </li>
         <li>
             <a href="testlist.jsp">page</a>
@@ -85,6 +87,16 @@
             </table>
         </div>
     </div>
+    <%--  显示未分配学生数据  --%>
+    <div id="showUnallocatedStuTable" style="display: none;"></div>
+    <%--  学生分配宿舍弹窗      --%>
+    <div class="wrap-box" id="diaStu" style="display: none;"><!--最外层包裹框，背景图片很鲜艳亮眼position:fixed-->
+        <div class='login-box'><!--登录表单框部分position:fixed-->
+            <select id="updateRoom" style="margin-left: 200px;">
+                <option>请选择宿舍号</option>
+            </select>
+        </div>
+    </div>
 </div>
 <%--下边版权信息--%>
 <div id="footer">
@@ -98,8 +110,11 @@
 
 
 
+
+
+
 <style type="text/css">
-    #dia
+    #dia, #diaStu
     {
         clear: left;
         float: left;

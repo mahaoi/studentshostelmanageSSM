@@ -19,9 +19,21 @@ public interface StuDao {
     @Select("select * from studentinfo")
     List<StudentInfo> findAll();
 
-    //id查询
+    //查询未分配宿舍学生
+    @Select("select * from studentinfo where state=#{state}")
+    List<StudentInfo> findByState(String state);
+
+    //id学号查询
     @Select("select * from studentinfo where id=#{id}")
-    StudentInfo findById(String id);
+    List<StudentInfo> findById(String id);
+
+    //姓名模糊查询
+    @Select("select * from studentinfo where name=%#{name}%")
+    List<StudentInfo> findByName(String name);
+
+    //班级查询
+    @Select("select * from studentinfo where name=%#{classes}%")
+    List<StudentInfo> findByClass(String classes);
 
     //删除
     @Delete("delete from studentinfo where id = #{id}")

@@ -31,7 +31,7 @@ public class StuController {
     private Room_StuService room_stuService;
 
     //查询所有
-    @RequestMapping("/findall")
+    @RequestMapping("/findAll")
     public String findAll(){
         List<StudentInfo> list = stuService.findAll();
         List objectList = new ArrayList();
@@ -49,6 +49,29 @@ public class StuController {
             objectList.add(map);
         }
         return JSON.toJSON(objectList).toString();
+    }
+
+    @RequestMapping("/findByState")
+    public String findByState(String state){
+        return JSON.toJSON(stuService.findByState(state)).toString();
+    }
+
+    //姓名模糊查询
+    @RequestMapping("/findByName")
+    public String findByName(String name){
+        return JSON.toJSON(stuService.findByName(name)).toString();
+    }
+
+    //学号查询
+    @RequestMapping("/findById")
+    public String findById(String id){
+        return JSON.toJSON(stuService.findById(id)).toString();
+    }
+
+    //班级查询
+    @RequestMapping("/findByClass")
+    public String findByClass(String classes){
+        return JSON.toJSON(stuService.findByClass(classes)).toString();
     }
 
     //根据学号删除

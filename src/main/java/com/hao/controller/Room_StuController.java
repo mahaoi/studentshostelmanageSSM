@@ -28,4 +28,5 @@ public class Room_StuController {
         List<Room_Stu> room_stu = room_stuService.findByRoomid(roomid);
         return JSON.toJSON(room_stu).toString();
     }
+
 }

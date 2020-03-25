@@ -25,6 +25,30 @@ public class StuServiceImpl implements StuService {
     }
 
     @Override
+    public List<StudentInfo> findByState(String state) {
+        //查询未分配
+        return stuDao.findByState(state);
+    }
+
+    @Override
+    public List<StudentInfo> findById(String id) {
+        //学号查询
+        return stuDao.findById(id);
+    }
+
+    @Override
+    public List<StudentInfo> findByName(String name) {
+        //姓名模糊查询
+        return stuDao.findByName(name);
+    }
+
+    @Override
+    public List<StudentInfo> findByClass(String classes) {
+        //班级查询
+        return stuDao.findByClass(classes);
+    }
+
+    @Override
     public void delById(String id) {
         //根据学号删除
         stuDao.delById(id);

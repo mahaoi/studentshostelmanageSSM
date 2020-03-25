@@ -13,6 +13,18 @@ public interface StuService {
     //查询所有
     List<StudentInfo> findAll();
 
+    //查询未分配宿舍学生
+    List<StudentInfo> findByState(String state);
+
+    //id学号查询
+    List<StudentInfo> findById(String id);
+
+    //姓名模糊查询
+    List<StudentInfo> findByName(String name);
+
+    //班级查询
+    List<StudentInfo> findByClass(String classes);
+
     //删除
     void delById(String id);
 

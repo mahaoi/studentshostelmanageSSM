@@ -2,7 +2,6 @@ package com.hao.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.hao.domain.RoomInfo;
-import com.hao.domain.Room_Stu;
 import com.hao.service.RoomService;
 import com.hao.service.Room_StuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author guoguo
@@ -50,6 +50,18 @@ public class RoomController {
             objectList.add(map);
         }
         return JSON.toJSON(objectList).toString();
+    }
+
+    @RequestMapping("/checkIn")
+    public String checkIn(){
+        //房间信息list
+        List<RoomInfo> list = roomService.findAll();
+        //使用filter()过滤List
+        List<RoomInfo> nullRoomList = list.stream().filter(
+                room -> room.getIn() - room_stuService.stuCount(room.getRoomid())!=0
+        ).collect(Collectors.toList());
+        //List转json
+        return JSON.toJSON(nullRoomList).toString();
     }
 
     //删除宿舍
