@@ -33,4 +33,19 @@ public class Room_StuServiceImpl implements Room_StuService {
     public String findRoomidById(String id) {
         return room_stuDao.findRoomidById(id);
     }
+
+    @Override
+    public void delete(String id) {
+        room_stuDao.delete(id);
+    }
+
+    @Override
+    public List<Room_Stu> findIdList(String roomId) {
+        return room_stuDao.findIdList(roomId);
+    }
+
+    @Override
+    public List<Room_Stu> findAll() {
+        return null;
+    }
 }

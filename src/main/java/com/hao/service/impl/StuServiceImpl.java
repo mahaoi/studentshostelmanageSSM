@@ -49,7 +49,7 @@ public class StuServiceImpl implements StuService {
     }
 
     @Override
-    public void delById(String id) {
+    public void delete(String id) {
         //根据学号删除
         stuDao.delById(id);
     }
@@ -58,4 +58,5 @@ public class StuServiceImpl implements StuService {
     public void upState(String state, String id) {
         stuDao.upState(state,id);
     }
+
 }

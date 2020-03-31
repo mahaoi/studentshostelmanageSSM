@@ -68,6 +68,6 @@ public class RoomController {
     @RequestMapping("/del")
     public void delRoom(String roomid){
         //删除宿舍
-        roomService.delRoom(roomid);
+        roomService.delete(roomid);
     }
 }

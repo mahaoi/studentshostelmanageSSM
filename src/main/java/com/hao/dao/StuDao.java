@@ -2,6 +2,7 @@ package com.hao.dao;
 
 import com.hao.domain.StudentInfo;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
@@ -41,5 +42,6 @@ public interface StuDao {
 
     //更新学生状态
     @Update("update studentinfo set state = #{state} where id = #{id}")
-    void upState(String state,String id);
+    void upState(@Param("state") String state, @Param("id") String id);
+
 }

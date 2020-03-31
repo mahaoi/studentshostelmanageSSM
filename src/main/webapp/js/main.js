@@ -3,10 +3,9 @@
  */
 function showStudentTable() {
     $("#stuInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
-    hideAll();//调用方法隐藏所有盒子
     //清空盒子
-    $("#showStudentTable").empty();
-    $("#showStudentTable").css("display","block");
+    $("#showData").empty();
+    // $("#showStudentTable").css("display","block");
     var tablehead = "<input type='text' id='findBy' placeholder='请输入查询内容'/>" +
         "<table width='100%'>\n" +
         "    <thead>\n" +
@@ -25,7 +24,7 @@ function showStudentTable() {
         "    <tbody id=\"stulist\">\n" +
         "    </tbody>\n" +
         "</table>";
-    $("#showStudentTable").append(tablehead);
+    $("#showData").append(tablehead);
     $.ajax({
         url : "stu/findAll",
         type : "get",
@@ -103,11 +102,10 @@ function up(id) {
  */
 function showRoomTable() {
     $("#roomInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
-    hideAll();//调用方法隐藏所有盒子
     //清空盒子
-    $("#showRoomTable").empty();
-    $("#showRoomTable").css("display","block");
-    var tablehead = "<input type='text' id='findBy' placeholder='请输入查询内容'/>" +
+    $("#showData").empty();
+    // $("#showRoomTable").css("display","block");
+    var tablehead = "<input type='text' id='findRoom' placeholder='请输入查询内容'/>" +
         "<table width='100%'>\n" +
         "    <thead>\n" +
         "    <tr>\n" +
@@ -123,7 +121,7 @@ function showRoomTable() {
         "    <tbody id=\"roomlist\">\n" +
         "    </tbody>\n" +
         "</table>";
-    $("#showRoomTable").append(tablehead);
+    $("#showData").append(tablehead);
     //请求数据
     $.ajax({
         url : "room/findAllRoom",
@@ -142,7 +140,7 @@ function showRoomTable() {
                     "<td>" + value.surplus + "</td>" +
                     "<td>" + value.password + "</td>" +
                     "<td>" + value.remarks + "</td>" +
-                    "<td><button onclick='moreInfo(\""+value.roomid+"\")'>详情</button><button onclick='update("+value.roomid+")'>更新</button><button onclick='delRoom(\""+value.roomid+"\")'>删除</button></td></tr>";
+                    "<td><button onclick='moreInfo(\""+value.roomid+"\")'>详情</button><button onclick='upRoom(\""+value.roomid+"\")'>更新</button><button onclick='delRoom(\""+value.roomid+"\")'>删除</button></td></tr>";
                 $("#roomlist").append(trs);
                 //设置文本居中
                 $("th,td").css("text-align","center");
@@ -150,7 +148,7 @@ function showRoomTable() {
         }
     });
     //通过输入框输入内容过滤表格
-    $('#findBy').on('input propertychange', function() {
+    $('#findRoom').on('input propertychange', function() {
         console.log( $(this).val());
         $('table tbody tr').hide()
             .filter(":contains('" + ($(this).val()) + "')")
@@ -199,7 +197,10 @@ function moreInfo(roomid) {
 function moreInfo2(result) {
     $.each(result, function (n, value) {
         // alert(n + ' ' + value);
-        var trs = "<tr><td>" + value.id + "</td><td>" + value.major + "</td><td>"+value.name+"</td></tr>";
+        var trs = "<tr><td>" + value.id + "</td>" +
+            "<td>" + value.major + "</td>" +
+            "<td>"+value.name+"</td>" +
+            "<td><button onclick='removeStuToRoom("+value.id+")'>移除</button></td></tr>";
         $("#roomInfoBody").append(trs);
     });
     $("#ok").click(function () {
@@ -207,10 +208,49 @@ function moreInfo2(result) {
         dia.style.display = 'none';
     });
 }
+
+/**
+ * 修改宿舍可入住人数
+ */
+function upRoom() {
+    alert("完善中！");
+}
+/**
+ * 学生从宿舍移除
+ */
+function removeStuToRoom(id) {
+    upStuState("1",id);
+    if(confirm("确定移除该学生吗？")){
+        $.ajax({
+            url : "room_stu/removeStu",
+            type : "post",
+            data : {id : id},
+            success : function() {
+                var dia = document.getElementById('dia');
+                dia.style.display = 'none';
+                showRoomTable();
+            }
+        });
+    }
+}
+/**
+ * 修改学生状态
+ */
+function upStuState(state,id) {
+    //修改学生状态
+    $.ajax({
+        url : "stu/upstate",
+        type : "post",
+        data : {state : state,id : id},
+        success : function() {}
+    });
+}
+
 /**
  * 删除宿舍
  */
 function delRoom(roomid) {
+    getDelRoomStuInfo(roomid);
     if(confirm("宿舍删除后，宿舍内人员信息将会丢失，确定继续吗？")){
         $.ajax({
             url : "room/del",
@@ -218,49 +258,28 @@ function delRoom(roomid) {
             data : {roomid : roomid},
             success : function() {
                 showRoomTable();
-                f(roomid);
-                // getDelRoomStuInfo(roomid);
             }
         });
     }
 }
-// function getDelRoomStuInfo(roomid) {
-//     //获取删除宿舍中的学生信息
-//     $.ajax({
-//         url : "room_stu/findAllStu",
-//         type : "post",
-//         data : {
-//             roomid : roomid
-//         },
-//         dataType : "json",
-//         success : function(result) {
-//             console.log(result);//空的（拿不到值）
-//             $.each(result, function (n, value) {
-//                 var students = value.studentInfos;
-//                 delRoomStu(students);
-//             });
-//         },
-//         error : function () {
-//             alert("getDelRoomStuInfo")
-//         }
-//     });
-// }
-// function delRoomStu(result) {
-//     //更新删除宿舍中的学生状态
-//     $.each(result, function (n, value) {
-//         $.ajax({
-//             url : "stu/upstate",
-//             type : "post",
-//             data : {state : "1" , id : value.id},
-//             success : function() {
-//                 alert("删除成功！");
-//             },
-//             error : function () {
-//                 alert("delRoomStu")
-//             }
-//         });
-//     });
-// }
+function getDelRoomStuInfo(data) {
+    //更改删除宿舍中的学生状态
+    $.ajax({
+        url : "room_stu/findIdList",
+        type : "post",
+        data : {roomId : data},
+        dataType : "json",
+        success : function(result) {
+            $.each(result, function (n, value) {
+                console.log(value.id);
+                upStuState("1",value.id);
+            });
+        },
+        error : function () {
+            alert("error");
+        }
+    });
+}
 
 
 /**
@@ -268,11 +287,11 @@ function delRoom(roomid) {
  */
 function UnallocatedStudentTable() {
     $("#unallocatedSyu").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
-    hideAll();//调用方法隐藏所有盒子
     //清空盒子
-    $("#showUnallocatedStuTable").empty();
-    $("#showUnallocatedStuTable").css("display","block");
-    var tablehead = "<table width='100%'>\n" +
+    $("#showData").empty();
+    // $("#showUnallocatedStuTable").css("display","block");
+    var tablehead = "<input type='text' id='findUnStu' placeholder='请输入查询内容'/>" +
+        "<table width='100%'>\n" +
         "    <thead>\n" +
         "    <tr>\n" +
         "        <th>学号</th>\n" +
@@ -288,7 +307,7 @@ function UnallocatedStudentTable() {
         "    <tbody id=\"unStulist\">\n" +
         "    </tbody>\n" +
         "</table>";
-    $("#showUnallocatedStuTable").append(tablehead);
+    $("#showData").append(tablehead);
     //请求数据
     $.ajax({
         url : "stu/findByState",
@@ -314,12 +333,20 @@ function UnallocatedStudentTable() {
             });
         }
     });
+    //通过输入框输入内容过滤表格
+    $('#findUnStu').on('input propertychange', function() {
+        console.log( $(this).val());
+        $('table tbody tr').hide()
+            .filter(":contains('" + ($(this).val()) + "')")
+            .show();
+    });
 }
 
 /**
  * 宿舍分配
  */
 function checkIn(id) {
+    alert("完善中");
     //弹出div
     var dia = document.getElementById('diaStu');
     dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
@@ -342,35 +369,131 @@ function checkIn(id) {
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
- * 隐藏所有盒子
+ * 访客列表
  */
-function hideAll() {
-    $("#showLogo").css("display","none");
-    $("#showStudentTable").css("display","none");
-    $("#showRoomTable").css("display","none");
-    $("#showUnallocatedStuTable").css("display","none");
+function showVisitorTable() {
+    $("#visitorInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
+    //清空盒子
+    $("#showData").empty();
+    var tablehead = "<input type='text' id='findVisit' placeholder='请输入查询内容'/>" +
+        "<table width='100%'>\n" +
+        "    <thead>\n" +
+        "    <tr>\n" +
+        "        <th>姓名</th>\n" +
+        "        <th>电话</th>\n" +
+        "        <th>时间</th>\n" +
+        "        <th>备注</th>\n" +
+        "    </tr>\n" +
+        "    </thead>\n" +
+        "    <tbody id=\"visitList\">\n" +
+        "    </tbody>\n" +
+        "</table>";
+    $("#showData").append(tablehead);
+    //请求数据
+    $.ajax({
+        url : "vis/findAll",
+        type : "get",
+        dataType : "json",
+        success : function(result) {
+            console.log(result);
+            $.each(result, function (n, value) {
+                var trs = "<tr><td>" + value.visitName + "</td>" +
+                    "<td>" + value.visitPhone + "</td>" +
+                    "<td>" + timestampToTime(value.visitTime) + "</td>" +
+                    "<td>" + value.visitRemarks +"</td></tr>";
+                $("#visitList").append(trs);
+                //设置文本居中
+                $("th,td").css("text-align","center");
+            });
+        }
+    });
+    //通过输入框输入内容过滤表格
+    $('#findVisit').on('input propertychange', function() {
+        console.log( $(this).val());
+        $('table tbody tr').hide()
+            .filter(":contains('" + ($(this).val()) + "')")
+            .show();
+    });
 }
 
 /**
- * 彩蛋：鼠标移动到果果妞妞播放bgm
+ * 访客添加
  */
+function addVisit() {
+    $("#showData").empty();
+    var table = "<table>\n" +
+        "    <tr>\n" +
+        "        <td>姓名：</td>\n" +
+        "        <td><input id='visitName'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>电话：</td>\n" +
+        "        <td><input id='visitPhone'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>备注：</td>\n" +
+        "        <td><input id='visitRemarks'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td></td>\n" +
+        "        <td><input id='submit' type='submit' value='提交'/></td>\n" +
+        "    </tr>\n" +
+        "</table>";
+    $("#showData").append(table);
+    $("tr,td").css("text-align","center");
+    $("#submit").click(function () {
+        $.ajax({
+            url : "vis/add",
+            type : "post",
+            data : {
+                visitName : $("#visitName").val(),
+                visitPhone : $("#visitPhone").val(),
+                visitRemarks : $("#visitRemarks").val()
+            },
+            success : function() {
+                alert("登记成功！");
+                showVisitorTable();
+            },
+            error : function () {
+                alert("error");
+            }
+        });
+    });
+}
+
+
+
+
+
+
+
+
+
+/**
+ * 时间戳转日期
+*/
+function timestampToTime(timestamp) {
+    var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    Y = date.getFullYear() + '-';
+    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    D = date.getDate() + ' ';
+    h = date.getHours() + ':';
+    m = (date.getMinutes() < 10 ? '0'+(date.getMinutes()) : date.getMinutes()) + ':';
+    s = (date.getSeconds() < 10 ? '0'+(date.getSeconds()) : date.getSeconds());
+    return Y+M+D+h+m+s;
+}
+/**
+ * 显示logo
+ */
+function showLogo() {
+    $("#logo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
+    $("#showData").empty().append("<img src=\"images/8.png\" width=\"100%\"/>");
+}
+
+
+
+
 function caiDan() {
     var trigger = null;
     var audio= new Audio("musics/bgm.mp3");

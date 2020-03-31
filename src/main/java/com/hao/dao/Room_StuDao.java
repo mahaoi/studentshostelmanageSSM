@@ -33,4 +33,12 @@ public interface Room_StuDao {
     //查询宿舍号
     @Select("select roomid from room_stu where id=#{id}")
     String findRoomidById(String id);
+
+    //移除学生
+    @Delete("delete from room_stu where id=#{id}")
+    void delete(String id);
+
+    //查询宿舍学生学号
+    @Select("SELECT id FROM room_stu WHERE roomid=#{roomId}")
+    List<Room_Stu> findIdList(String roomId);
 }

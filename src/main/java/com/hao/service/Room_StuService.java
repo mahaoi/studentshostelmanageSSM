@@ -9,7 +9,7 @@ import java.util.List;
  * @version 1.0
  * @date 2020/3/16 21:23
  */
-public interface Room_StuService {
+public interface Room_StuService extends BaseService<Room_Stu>{
     //查询已入住
     List<Room_Stu> findByRoomid(String roomid);
 
@@ -19,4 +19,6 @@ public interface Room_StuService {
     //查询宿舍号
     String findRoomidById(String id);
 
+    //查询宿舍学生学号
+    List<Room_Stu> findIdList(String roomId);
 }

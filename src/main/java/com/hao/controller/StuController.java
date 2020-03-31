@@ -51,6 +51,7 @@ public class StuController {
         return JSON.toJSON(objectList).toString();
     }
 
+    //未分配学生
     @RequestMapping("/findByState")
     public String findByState(String state){
         return JSON.toJSON(stuService.findByState(state)).toString();
@@ -77,7 +78,7 @@ public class StuController {
     //根据学号删除
     @RequestMapping("/del")
     public void delById(String id){
-        stuService.delById(id);
+        stuService.delete(id);
     }
 
     //设置学生状态

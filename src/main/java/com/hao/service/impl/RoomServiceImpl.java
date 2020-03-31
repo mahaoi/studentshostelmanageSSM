@@ -25,7 +25,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void delRoom(String roomid) {
+    public void delete(String roomid) {
         roomDao.delRoom(roomid);
     }
 }

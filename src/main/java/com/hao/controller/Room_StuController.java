@@ -23,10 +23,22 @@ public class Room_StuController {
     @Autowired
     private Room_StuService room_stuService;
 
+
     @RequestMapping("/findAllStu")
     public String findByRoomid(String roomid){
         List<Room_Stu> room_stu = room_stuService.findByRoomid(roomid);
         return JSON.toJSON(room_stu).toString();
     }
 
+    @RequestMapping("/removeStu")
+    public void removeStu(String id){
+        room_stuService.delete(id);
+    }
+
+    @RequestMapping("/findIdList")
+    public String findIdList(String roomId){
+        List<Room_Stu> idList = room_stuService.findIdList(roomId);
+        System.out.println(idList);
+        return JSON.toJSON(idList).toString();
+    }
 }

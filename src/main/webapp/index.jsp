@@ -11,7 +11,6 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/Gl.js"></script>
     <link type="text/css" rel="styleSheet"  href="css/main.css" />
     <title>Students Hostel Manage</title>
 </head>
@@ -20,6 +19,7 @@
 <div id="header">
     <a>
         <img src="images/logo.png" style="width: 229px;height: 63.85px;"/>
+        <button id="addVisitor" onclick="addVisit()">来访登记</button>
     </a>
 <%--    <iframe width="450" scrolling="no" height="18" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=1&color=%230070C0&icon=1&wind=1&num=2&site=12"></iframe>--%>
 </div>
@@ -27,7 +27,7 @@
 <div id="nav">
     <ul>
         <li>
-            <a href="index.jsp">Home</a>
+            <a onclick="showLogo()" id="logo" class="clkFontColor">Home</a>
         </li>
         <li>
             <a onclick="showStudentTable()" id="stuInfo">Student Info</a>
@@ -37,6 +37,9 @@
         </li>
         <li>
             <a onclick="UnallocatedStudentTable()" id="unallocatedSyu">Unallocated Student</a>
+        </li>
+        <li>
+            <a onclick="showVisitorTable()" id="visitorInfo">Visitor Info</a>
         </li>
         <li>
             <a href="testlist.jsp">page</a>
@@ -52,43 +55,38 @@
 <%--信息显示的盒子--%>
 <div id="section">
     <%--  显示logo  --%>
-    <div id="showLogo" style="display: block;"><img src="images/8.png" width="100%"/></div>
-    <%--  显示学生数据  --%>
-    <div id="showStudentTable" style="display: none;"></div>
-    <%--  显示宿舍数据  --%>
-    <div id="showRoomTable" style="display: none;"></div>
+    <div id="showData" style="display: block;"><img src="images/8.png" width="100%"/></div>
     <%--  宿舍详情弹窗  --%>
     <div class="wrap-box" id="dia" style="display: none;"><!--最外层包裹框，背景图片很鲜艳亮眼position:fixed-->
         <div class='login-box'><!--表单框部分position:fixed-->
-            <table border="0" style="margin-left: 90px;">
+            <table border="0" style="margin-left: 60px;">
                 <thead align="center">
-                    <tr><th colspan="3">==========================</th></tr>
-                    <tr><th colspan="3">宿舍入住详情</th></tr>
-                    <tr><th colspan="3">==========================</th></tr>
+                    <tr><th colspan="4">============================</th></tr>
+                    <tr><th colspan="4">宿舍入住详情</th></tr>
+                    <tr><th colspan="4">============================</th></tr>
                     <tr>
                         <td id="roomId"></td>
-                        <td></td>
+                        <td></td><td></td>
                         <td id="roomIn"></td>
                     </tr>
-                    <tr><th colspan="3">----------------------------------------------</th></tr>
+                    <tr><th colspan="4">--------------------------------------------------</th></tr>
                     <tr>
                         <td>学号</td>
                         <td>专业</td>
                         <td>姓名</td>
+                        <td>操作</td>
                     </tr>
-                    <tr><th colspan="3">----------------------------------------------</th></tr>
+                    <tr><th colspan="4">--------------------------------------------------</th></tr>
                 </thead>
                 <tfoot align="center">
-                    <tr><th colspan="3">----------------------------------------------</th></tr>
-                    <tr><td></td><td></td><td><a id="ok" style="color: aqua">确定</a></td></tr>
-                    <tr><th colspan="3">==========================</th></tr>
+                    <tr><th colspan="4">--------------------------------------------------</th></tr>
+                    <tr><td></td><td></td><td></td><td><a id="ok" style="color: aqua">确定</a></td></tr>
+                    <tr><th colspan="4">============================</th></tr>
                 </tfoot>
                 <tbody align="center" id="roomInfoBody"></tbody>
             </table>
         </div>
     </div>
-    <%--  显示未分配学生数据  --%>
-    <div id="showUnallocatedStuTable" style="display: none;"></div>
     <%--  学生分配宿舍弹窗      --%>
     <div class="wrap-box" id="diaStu" style="display: none;"><!--最外层包裹框，背景图片很鲜艳亮眼position:fixed-->
         <div class='login-box'><!--登录表单框部分position:fixed-->

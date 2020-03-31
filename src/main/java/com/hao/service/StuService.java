@@ -9,9 +9,7 @@ import java.util.List;
  * @version 1.0
  * @date 2020/3/15 19:33
  */
-public interface StuService {
-    //查询所有
-    List<StudentInfo> findAll();
+public interface StuService extends BaseService<StudentInfo>{
 
     //查询未分配宿舍学生
     List<StudentInfo> findByState(String state);
@@ -24,9 +22,6 @@ public interface StuService {
 
     //班级查询
     List<StudentInfo> findByClass(String classes);
-
-    //删除
-    void delById(String id);
 
     //更新学生状态
     void upState(String state,String id);
