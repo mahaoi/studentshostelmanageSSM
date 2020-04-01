@@ -15,7 +15,7 @@ public interface BaseService<T> {
 
 //    T select(int id);
 
-//    int insert(T t);
+    int insert(T t);
 
     List<T> findAll();
 

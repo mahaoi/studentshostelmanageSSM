@@ -3,53 +3,74 @@
 <%--
   Created by IntelliJ IDEA.
   User: guoguo
-  Date: 2020/3/8
-  Time: 16:05
+  Date: 2020/4/1
+  Time: 15:52
   To change this template use File | Settings | File Templates.
 --%>
 <head>
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <title>User Login</title>
+    <script src="js/index.js"></script>
 </head>
-<script>
-    $(function () {
-        $("#login").click(function () {
-            //判断用户名和密码是否为空
-            if (($("#username").val()!="") && ($("#password").val()!="")) {
-                $("#null-username-password").text("");
-                //请求
-                $.ajax({
-                    url : "login/log",
-                    type : "POST",
-                    async : true,
-                    dataType : "json",
-                    data : {
-                        username : $("#username").val(),
-                        password : $("#password").val()
-                    },
-                    success : function(result) {
-                        if (result=="0") {
-                            alert("登录成功！");
-                        }else {
-                            alert("登录失败！");
-                        }
-                    }
-                });
-            }else {
-                $("#null-username-password").text("用户名或密码不能为空").css({"color":"red"});
-            }
-        });
-    });
-</script>
 <body>
-<div>
-    <from>
-        姓名：<input type="text" name="username" id="username"/><br/>
-        密码：<input type="password" name="password" id="password"/><br/>
-        <span id="null-username-password"></span><br/>
-        <a href="register.jsp">还没有账号，去注册！</a><br/>
-        <input type="submit" id="login" value="Sign in"/><br/>
-    </from>
+
+
+<div class="materialContainer">
+    <div class="box">
+        <div class="title">登录</div>
+        <div class="input">
+            <label for="name">用户名</label>
+            <input type="text" name="name" id="name">
+            <span class="spin"></span>
+        </div>
+        <div class="input">
+            <label for="pass">密码</label>
+            <input type="password" name="pass" id="pass">
+            <span class="spin"></span>
+        </div>
+        <span id="null-username-password"></span>
+        <div class="button login">
+            <button id="loginBtu">
+                <span>登录</span>
+                <i class="fa fa-check"></i>
+            </button>
+        </div>
+        <a href="javascript:" class="pass-forgot">忘记密码？</a>
+    </div>
+
+    <div class="overbox">
+        <div class="material-button alt-2">
+            <span class="shape"></span>
+        </div>
+        <div class="title">注册</div>
+        <div class="input">
+            <label for="regname">用户名</label>
+            <input type="text" name="regname" id="regname">
+            <span class="spin"></span>
+        </div>
+        <div class="input">
+            <label for="regpass">密码</label>
+            <input type="password" name="regpass" id="regpass">
+            <span class="spin"></span>
+        </div>
+        <div class="input">
+            <label for="reregpass">确认密码</label>
+            <input type="password" name="reregpass" id="reregpass">
+            <span class="spin"></span>
+        </div>
+        <div class="button">
+            <button id="regBtu">
+                <span>注册</span>
+            </button>
+        </div>
+    </div>
+
 </div>
+
+
+
 </body>
+
 </html>

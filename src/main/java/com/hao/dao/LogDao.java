@@ -17,21 +17,21 @@ import java.util.List;
 public interface LogDao {
     //用户名检测
     @Select("select * from student where username = #{username}")
-    public Student testUserName(Student student);
+    Student testUserName(Student student);
 
     //登录用户查询
     @Select("select * from student where username = #{username} and password = #{password}")
-    public Student findStudent(Student student);
+    Student findStudent(Student student);
 
     // 保存用户信息
     @Insert("insert into student (username,password,phone) values (#{username},#{password},#{phone})")
-    public void saveStudent(Student student);
+    void saveStudent(Student student);
 
     //查询所有
     @Select("select * from student")
-    public List<Student> findAll();
+    List<Student> findAll();
 
     //查询有剩余床位的宿舍号
     @Select("select * from room")
-    public List<Room> updateRoom();
+    List<Room> updateRoom();
 }

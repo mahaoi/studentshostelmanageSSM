@@ -62,7 +62,7 @@
                 },
                 success : function() {
                         alert("注册成功");
-                        $("#userFrom").attr("action","login.jsp");
+                        $("#userFrom").attr("action","login1.jsp");
                         $("#userFrom").submit();
                 },
                 error : function () {
@@ -79,7 +79,7 @@
         密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="password" id="password"/><br/>
         确认密码：<input type="password" name="repeat-password" id="repeat-password"/><span id="error-password"></span><br/>
         联系方式：<input type="text" name="password" id="phone"/><br/>
-        <a href="login.jsp">已有账号，去登录！</a><br/>
+        <a href="login1.jsp">已有账号，去登录！</a><br/>
         <input type="submit" id="register" value="提交"/><br/>
     </form>
 </div>

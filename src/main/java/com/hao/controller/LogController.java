@@ -1,7 +1,6 @@
 package com.hao.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.hao.domain.Room;
 import com.hao.domain.Student;
 import com.hao.service.LogService;
@@ -55,9 +54,6 @@ public class LogController {
     @RequestMapping("/findall")
     public String findAll(){
         List<Student> list = logService.findAll();
-//        System.out.println(list);
-//        System.out.println("+++++++++++++++++++++++++++++++++++++++");
-//        System.out.println(JSON.toJSON(list).toString());
         return JSON.toJSON(list).toString();
     }
 

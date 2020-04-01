@@ -48,4 +48,14 @@ public class Room_StuServiceImpl implements Room_StuService {
     public List<Room_Stu> findAll() {
         return null;
     }
+
+    @Override
+    public int insert(Room_Stu room_stu) {
+        return room_stuDao.insert(room_stu);
+    }
+
+    @Override
+    public void update(String roomid, String id) {
+        room_stuDao.update(roomid,id);
+    }
 }

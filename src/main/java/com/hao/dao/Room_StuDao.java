@@ -41,4 +41,12 @@ public interface Room_StuDao {
     //查询宿舍学生学号
     @Select("SELECT id FROM room_stu WHERE roomid=#{roomId}")
     List<Room_Stu> findIdList(String roomId);
+
+    //插入记录
+    @Insert("insert into room_stu (roomid,id) values (#{roomid},#{id})")
+    int insert(Room_Stu room_stu);
+
+    //修改
+    @Update("update room_stu set roomid = #{roomid} where id = #{id}")
+    void update(@Param("roomid")String roomid,@Param("id")String id);
 }

@@ -67,7 +67,12 @@ public class RoomController {
     //删除宿舍
     @RequestMapping("/del")
     public void delRoom(String roomid){
-        //删除宿舍
         roomService.delete(roomid);
+    }
+
+    //修改宿舍可入住人数
+    @RequestMapping("/updateRoomIn")
+    public void updateRoomIn(String roomid,String roomin){
+        roomService.update(roomid,roomin);
     }
 }

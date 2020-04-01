@@ -50,7 +50,7 @@ function showStudentTable() {
                     "<td>" + value.classes + "</td>" +
                     "<td>" + value.phone + "</td>" + state +
                     "<td>" + roomid + "</td>" +
-                    "<td><button onclick='up("+value.id+")'>更新</button><button onclick='del("+value.id+")'>删除</button></td></tr>";
+                    "<td><button onclick='up("+value.id+")'>换宿</button><button onclick='del("+value.id+")'>删除</button></td></tr>";
                 $("#stulist").append(trs);
                 //设置文本居中
                 $("th,td").css("text-align","center");
@@ -85,16 +85,47 @@ function del(id) {
  * 更新学生信息
  */
 function up(id) {
+    //弹出div
+    var dia = document.getElementById('diaStu');
+    dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
+    //清楚无用子节点
+    $("#update").empty().append("<option>请选择宿舍号</option>");
+    //查询拥有空床位的宿舍号
     $.ajax({
-        url : "stu/up",
-        type : "post",
-        data : {id : id},
-        success : function() {
-            showStudentTable();
+        url : "room/checkIn",
+        type : "get",
+        dataType : "json",
+        success : function(result) {
+            $.each(result, function (n, value) {
+                var trs = "<option value='" + value.roomid + "'>" + value.roomid + "</option>";
+                $("#update").append(trs);
+            });
         },
         error : function () {
-            alert("功能完善中~~~");
+            alert("error");
         }
+    });
+    $("#diaStu").append("<button id='checkInOk'>确定</button>");
+    //获取选择的值
+    $("#update").change(function(){
+        $("#checkInOk").click(function () {
+            dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
+            $.ajax({
+                url : "room_stu/upStuRoomid",
+                type : "post",
+                data : {
+                    roomid : $("#update").val(),
+                    id : id
+                },
+                success : function() {
+                    alert("修改成功！");
+                    showStudentTable();
+                },
+                error : function () {
+                    alert("error");
+                }
+            });
+        });
     });
 }
 /**
@@ -168,9 +199,7 @@ function moreInfo(roomid) {
     $.ajax({
         url : "room_stu/findAllStu",
         type : "post",
-        data : {
-            roomid : roomid
-        },
+        data : {roomid : roomid},
         dataType : "json",
         success : function(result) {
             //设置清单头部信息  宿舍编号和宿舍已入住人数
@@ -212,8 +241,46 @@ function moreInfo2(result) {
 /**
  * 修改宿舍可入住人数
  */
-function upRoom() {
-    alert("完善中！");
+function upRoom(roomid) {
+    //弹出div
+    var dia = document.getElementById('diaStu');
+    dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
+    //清楚无用子节点
+    var str = "<option>请选择可入住人数</option>" +
+        "<option value='1'>1</option>" +
+        "<option value='2'>2</option>" +
+        "<option value='3'>3</option>" +
+        "<option value='4'>4</option>" +
+        "<option value='5'>5</option>" +
+        "<option value='6'>6</option>" +
+        "<option value='7'>7</option>";
+    $("#update").empty().append(str);
+
+    $("#diaStu").append("<button id='okBtu'>确定</button>");
+    //获取选择的值
+    $("#update").change(function(){
+        $("#okBtu").click(function () {
+            dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
+            updateRoomIn(roomid,$("#update").val());
+        });
+    });
+}
+function updateRoomIn(roomid,roomIn) {
+    $.ajax({
+        url : "room/updateRoomIn",
+        type : "post",
+        data : {
+            roomid : roomid,
+            roomin : roomIn
+        },
+        success : function() {
+            alert("修改成功！");
+            showRoomTable();
+        },
+        error : function () {
+            alert("error");
+        }
+    });
 }
 /**
  * 学生从宿舍移除
@@ -346,12 +413,11 @@ function UnallocatedStudentTable() {
  * 宿舍分配
  */
 function checkIn(id) {
-    alert("完善中");
     //弹出div
     var dia = document.getElementById('diaStu');
     dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
     //清楚无用子节点
-    $("#updateRoom").empty().append("<option>请选择宿舍号</option>");
+    $("#update").empty().append("<option>请选择宿舍号</option>");
     //查询拥有空床位的宿舍号
     $.ajax({
         url : "room/checkIn",
@@ -360,14 +426,46 @@ function checkIn(id) {
         success : function(result) {
             $.each(result, function (n, value) {
                 var trs = "<option value='" + value.roomid + "'>" + value.roomid + "</option>";
-                $("#updateRoom").append(trs);
+                $("#update").append(trs);
             });
         },
         error : function () {
             alert("error");
         }
     });
+    $("#diaStu").append("<button id='checkInOk'>提交</button>");
+    //获取选择的值
+    $("#update").change(function(){
+        $("#checkInOk").click(function () {
+            dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
+            checkInOk($("#update").val(),id);
+        });
+    });
 }
+function checkInOk(roomId,id) {
+    $.ajax({
+        url : "room_stu/addStuToRoom",
+        type : "post",
+        data : {
+            roomid : roomId,
+            id : id
+        },
+        success : function() {
+            upStuState("0",id);
+            alert("分配成功！");
+            UnallocatedStudentTable();
+        },
+        error : function () {
+            alert("error");
+        }
+    });
+
+}
+
+
+
+
+
 
 /**
  * 访客列表

@@ -21,4 +21,7 @@ public interface Room_StuService extends BaseService<Room_Stu>{
 
     //查询宿舍学生学号
     List<Room_Stu> findIdList(String roomId);
+
+    //修改
+    void update(String roomid,String id);
 }

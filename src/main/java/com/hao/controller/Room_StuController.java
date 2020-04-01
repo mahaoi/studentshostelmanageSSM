@@ -41,4 +41,17 @@ public class Room_StuController {
         System.out.println(idList);
         return JSON.toJSON(idList).toString();
     }
+
+    @RequestMapping("/addStuToRoom")
+    public void addStuToRoom(String roomid,String id){
+        Room_Stu room_stu = new Room_Stu();
+        room_stu.setRoomid(roomid);
+        room_stu.setId(id);
+        room_stuService.insert(room_stu);
+    }
+
+    @RequestMapping("/upStuRoomid")
+    public void upStuRoomid(String roomid,String id){
+        room_stuService.update(roomid,id);
+    }
 }

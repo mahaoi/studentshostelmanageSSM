@@ -27,6 +27,23 @@
     <mvc:resources location="/js/" mapping="/js/**" />
     <mvc:resources location="/musics/" mapping="/musics/**" />
 
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/css/*"/>
+            <mvc:exclude-mapping path="/**/**/**/**/*.ttf"/>
+            <mvc:exclude-mapping path="/**/**/**/**/*.woff"/>
+            <mvc:exclude-mapping path="/**/**/**/**/*.woff2"/>
+            <mvc:exclude-mapping path="/**/*.css"/>
+            <mvc:exclude-mapping path="/**/*.js"/>
+            <mvc:exclude-mapping path="/**/*.png"/>
+            <mvc:exclude-mapping path="/**/*.jpg"/>
+            <mvc:exclude-mapping path="/**/*.mp3"/>
+            <bean class="com.hao.intercept.logIntercept"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!--开启SpringMVC注解的支持-->
     <mvc:annotation-driven/>
 

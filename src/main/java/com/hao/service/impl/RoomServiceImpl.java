@@ -28,4 +28,14 @@ public class RoomServiceImpl implements RoomService {
     public void delete(String roomid) {
         roomDao.delRoom(roomid);
     }
+
+    @Override
+    public void update(String roomid, String roomIn) {
+        roomDao.update(roomid,roomIn);
+    }
+
+    @Override
+    public int insert(RoomInfo roomInfo) {
+        return 0;
+    }
 }

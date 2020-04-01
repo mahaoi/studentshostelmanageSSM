@@ -51,7 +51,7 @@
 </div>
 
 <div id="nav">
-    <a href="login.jsp">Sign in</a><br/>
+    <a href="login1.jsp">Sign in</a><br/>
     <a href="list.jsp">list</a><br/>
     <a href="testlist.jsp">page</a><br/>
     <a href="tan.jsp">tanchuang</a><br/>

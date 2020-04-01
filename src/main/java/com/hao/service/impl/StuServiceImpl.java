@@ -59,4 +59,8 @@ public class StuServiceImpl implements StuService {
         stuDao.upState(state,id);
     }
 
+    @Override
+    public int insert(StudentInfo studentInfo) {
+        return 0;
+    }
 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class RoomInfo implements Serializable {
     private String roomid;//宿舍编号
-    private Integer in;//可入住人数
+    private Integer roomin;//可入住人数
     private String password;//密码
     private String remarks;//备注
 
@@ -24,11 +24,11 @@ public class RoomInfo implements Serializable {
     }
 
     public Integer getIn() {
-        return in;
+        return roomin;
     }
 
     public void setIn(Integer in) {
-        this.in = in;
+        this.roomin = in;
     }
 
     public String getPassword() {
@@ -51,7 +51,7 @@ public class RoomInfo implements Serializable {
     public String toString() {
         return "RoomInfo{" +
                 "roomid='" + roomid + '\'' +
-                ", in=" + in +
+                ", in=" + roomin +
                 ", password='" + password + '\'' +
                 ", remarks='" + remarks + '\'' +
                 '}';

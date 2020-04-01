@@ -48,7 +48,7 @@
             <a href="tan.jsp">tanchuang</a>
         </li>
         <li>
-            <a href="login.jsp">Sign in</a>
+            <a href="login1.jsp">Sign in</a>
         </li>
     </ul>
 </div>
@@ -90,8 +90,7 @@
     <%--  学生分配宿舍弹窗      --%>
     <div class="wrap-box" id="diaStu" style="display: none;"><!--最外层包裹框，背景图片很鲜艳亮眼position:fixed-->
         <div class='login-box'><!--登录表单框部分position:fixed-->
-            <select id="updateRoom" style="margin-left: 200px;">
-                <option>请选择宿舍号</option>
+            <select id="update" style="margin-left: 200px;">
             </select>
         </div>
     </div>
