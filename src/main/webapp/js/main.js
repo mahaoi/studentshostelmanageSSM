@@ -560,6 +560,39 @@ function addVisit() {
     });
 }
 
+/**
+ * 退出logout
+ */
+function logout() {
+    $.ajax({
+        url : "sign/logout",
+        type : "get",
+        success : function() {
+            $(location).attr("href","login.jsp");
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

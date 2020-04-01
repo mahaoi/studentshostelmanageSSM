@@ -28,22 +28,15 @@ public class ManagerController {
         return managerService.testUserName(managerInfo).getPassword()!=null ? "0" : "1";
     }
 
-    @RequestMapping("/log")
+    @RequestMapping("/login")
     public String loginController(ManagerInfo managerInfo, HttpSession session){
         //0：登陆成功  1：登陆失败
         ManagerInfo manager = managerService.findManager(managerInfo);
-        if (manager == null){
-            return "1";
+        if (manager != null){
+            session.setAttribute("user",manager.getUsername());
+            return "0";
         }
-        return "0";
-//        if (managerInfo!=null) {
-//            ManagerInfo manager = managerService.findManager(managerInfo);
-//            if (user!=null) {
-//                session.setAttribute("id",user.getId());
-//                return "index";
-//            }
-//        }
-//        return "login";
+        return "1";
     }
 
     @RequestMapping("/add")
@@ -52,8 +45,9 @@ public class ManagerController {
         return "0";
     }
 
-    @RequestMapping("/tologin")
-    public String toLogin(){
-        return "login.jsp";
+    @RequestMapping(value = "/logout")
+    public void logout(HttpSession session) throws Exception {
+        // 清除Session
+        session.invalidate();
     }
 }

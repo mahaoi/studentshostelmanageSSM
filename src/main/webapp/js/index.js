@@ -122,7 +122,7 @@ $(function() {
            $("#null-username-password").text("");
            //请求
            $.ajax({
-               url : "sign/log",
+               url : "sign/login",
                type : "POST",
                dataType : "json",
                data : {
@@ -131,10 +131,10 @@ $(function() {
                },
                success : function(result) {
                    if (result=="0") {
-                       alert("登录成功！");
-                       window.location.href="http://localhost:8080/studentshostelmanageSSM_war_exploded/";
+                       $(location).attr("href","index.jsp");
                    }else {
-                       alert("登录失败！");
+                       alert("用户名或密码错误！");
+                      $(location).attr("href","login.jsp");
                    }
                }
            });

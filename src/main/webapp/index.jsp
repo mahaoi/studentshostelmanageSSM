@@ -14,14 +14,41 @@
     <link type="text/css" rel="styleSheet"  href="css/main.css" />
     <title>Students Hostel Manage</title>
 </head>
+<script>
+    $(function(){
+        var username = '<%= session.getAttribute("user")%>';
+        if (username == 'null'){
+            $("nav").empty().append("<a> <img src=\"images/logo.png\" style=\"width: 229px;height: 63.85px;\"/></a>" +
+                "<a id='meg' style='margin-left: 30%'>你还未登录！3秒后跳转至登录！</a> ");
+            $("#meg").css({"color":"red"});
+            setTimeout(function () {
+                $(location).attr("href","login.jsp");
+            },3000);
+        }
+    });
+</script>
 <body>
 <%--头部导航栏--%>
 <div id="header">
-    <a>
-        <img src="images/logo.png" style="width: 229px;height: 63.85px;"/>
-        <button id="addVisitor" onclick="addVisit()">来访登记</button>
-    </a>
-<%--    <iframe width="450" scrolling="no" height="18" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=1&color=%230070C0&icon=1&wind=1&num=2&site=12"></iframe>--%>
+    <nav>
+        <a>
+            <img src="images/logo.png" style="width: 229px;height: 63.85px;"/>
+        </a>
+        <a>
+<%--            <iframe width="450" scrolling="no" height="18" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=1&color=%230070C0&icon=1&wind=1&num=2&site=12"></iframe>--%>
+        </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a>
+            <button id="addVisitor" onclick="addVisit()">来访登记</button>
+        </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a>
+            <button id="adminName"><%=request.getSession().getAttribute("user") %></button>
+        </a>
+        <a>
+            <button onclick="logout()">退出</button>
+        </a>
+    </nav>
 </div>
 <%--侧边导航栏--%>
 <div id="nav">
