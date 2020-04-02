@@ -561,6 +561,218 @@ function addVisit() {
 }
 
 /**
+ * admin页面报修信息
+ */
+function repairTable() {
+    $("#repairInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
+    //清空盒子
+    $("#showData").empty();
+    var tablehead = "<table width='100%'>\n" +
+        "    <thead>\n" +
+        "    <tr>\n" +
+        "        <th>寝室</th>\n" +
+        "        <th>报修时间</th>\n" +
+        "        <th>内容</th>\n" +
+        "        <th>完成时间</th>\n" +
+        "        <th>状态</th>\n" +
+        "    </tr>\n" +
+        "    </thead>\n" +
+        "    <tbody id=\"repairTable\">\n" +
+        "    </tbody>\n" +
+        "</table>";
+    $("#showData").append(tablehead);
+    //请求数据
+    $.ajax({
+        url : "repair/findAll",
+        type : "get",
+        dataType : "json",
+        success : function(result) {
+            console.log(result);
+            $.each(result, function (n, value) {
+                var state = "<td style='color: aqua'>已完成</td>";
+                var endTime = value.endTime;
+                if (value.repairState == "1"){
+                    state = "<td style='color: red'>报修中</td>";
+                    endTime = "未完成";
+                }else {
+                    endTime = timestampToTime(value.endTime);
+                }
+                var trs = "<tr><td>" + value.repairName + "</td>" +
+                    "<td>" + timestampToTime(value.repairTime) + "</td>" +
+                    "<td>" + value.repairText + "</td>" +
+                    "<td>" + endTime + "</td>" + state
+                "</tr>";
+                $("#repairTable").append(trs);
+                //设置文本居中
+                $("th,td").css("text-align","center");
+            });
+        }
+    });
+}
+
+
+/**
+ * 用户页面宿舍详情
+ */
+function Info(roomid) {
+    $("#userRoomInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
+    //清楚无用子节点
+    $("#showData").empty();
+    var tablehead = "<table width='100%'>\n" +
+        "    <thead>\n" +
+        "    <tr>\n" +
+        "        <th>学号</th>\n" +
+        "        <th>姓名</th>\n" +
+        "        <th>性别</th>\n" +
+        "        <th>专业</th>\n" +
+        "        <th>班级</th>\n" +
+        "        <th>电话</th>\n" +
+        "    </tr>\n" +
+        "    </thead>\n" +
+        "    <tbody id=\"stuList\">\n" +
+        "    </tbody>\n" +
+        "</table>";
+    $("#showData").append(tablehead);
+    //查询宿舍具体信息
+    $.ajax({
+        url : "room_stu/findAllStu",
+        type : "post",
+        data : {
+            roomid : roomid
+        },
+        dataType : "json",
+        success : function(result) {
+            console.log(result);
+            $.each(result, function (n, value) {
+                $.each(value.studentInfos,function (o,p) {
+                    var trs = "<tr><td>" + value.id + "</td>" +
+                        "<td>" + p.name + "</td>" +
+                        "<td>" + p.sex + "</td>" +
+                        "<td>" + p.major + "</td>" +
+                        "<td>" + p.classes + "</td>" +
+                        "<td>" + p.phone + "</td></tr>";
+                    $("#stuList").append(trs);
+                    $("th,td").css("text-align","center");
+                });
+            });
+        },
+        error : function () {
+            alert("error");
+        }
+    });
+}
+
+/**
+ * 用户提交报修信息
+ */
+function subRepair(repairName) {
+    $.ajax({
+        url : "repair/addRepair",
+        type : "post",
+        data : {
+            repairName : repairName,
+            repairText : $("textarea").val(),
+            repairState : "1"
+        },
+        success : function() {
+            alert("报修成功！");
+            findOldRepair(repairName);
+        },
+        error : function () {
+            alert("error");
+        }
+    });
+}
+
+/**
+ * 用户查看报修记录
+ */
+function findOldRepair(repairName) {
+    $("#userRepair").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
+    //清楚无用子节点
+    $("#showData").empty();
+    var tablehead = "<table width='100%'>\n" +
+        "    <thead>\n" +
+        "    <tr>\n" +
+        "        <th>报修寝室</th>\n" +
+        "        <th>报修时间</th>\n" +
+        "        <th>报修内容</th>\n" +
+        "        <th>完成时间</th>\n" +
+        "        <th>报修状态</th>\n" +
+        "        <th>报修确认</th>\n" +
+        "    </tr>\n" +
+        "    </thead>\n" +
+        "    <tbody id=\"List\">\n" +
+        "    </tbody>\n" +
+        "</table>";
+    $("#showData").append(tablehead);
+    //查询宿舍具体信息
+    $.ajax({
+        url : "repair/findByRoomId",
+        type : "post",
+        data : {
+            repairName : repairName
+        },
+        dataType : "json",
+        success : function(result) {
+            console.log(result);
+            $.each(result, function (n, value) {
+                var state = "<td style='color: aqua'>已完成</td>";
+                var endTime = value.endTime;
+                var repairOk = "<td><button style='color: darkgrey'>已确认</button></td>";
+                if (value.repairState == "1"){
+                    state = "<td style='color: red'>报修中</td>";
+                    endTime = "未完成";
+                    repairOk = "<td><input type='submit' onclick=\"repairOk("+value.repairId+",'"+value.repairName+"')\" value='确认'/></td>";
+                }else {
+                    endTime = timestampToTime(value.endTime);
+                }
+                var trs = "<tr><td>" + value.repairName + "</td>" +
+                    "<td>" + timestampToTime(value.repairTime) + "</td>" +
+                    "<td>" + value.repairText + "</td>" +
+                    "<td>" + endTime + "</td>" + state + repairOk
+                "</tr>";
+                $("#List").append(trs);
+                $("th,td").css("text-align","center");
+            });
+        },
+        error : function () {
+            alert("error");
+        }
+    });
+}
+
+/**
+ * 用户确认报修完成
+ */
+function repairOk(id,name) {
+    $.ajax({
+        url : "repair/upState",
+        type : "post",
+        data : {
+            repairId : id,
+            repairState : "0"
+        },
+        success : function() {
+            alert("确认成功！");
+            findOldRepair(name);
+        },
+        error : function () {
+            alert("error");
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+/**
  * 退出logout
  */
 function logout() {
@@ -573,9 +785,152 @@ function logout() {
     });
 }
 
+/**
+ * 管理员修改密码
+ */
+function upAdminPass(adminName) {
+    $("#showData").empty();
+    var table = "<table>\n" +
+        "    <tr>\n" +
+        "        <td>旧密码：</td>\n" +
+        "        <td><input type='password' id='oldPass'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>新密码：</td>\n" +
+        "        <td><input type='password' id='newPass'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>确认密码：</td>\n" +
+        "        <td><input type='password' id='newPass2'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td><a href='index.jsp'>取消</a></td>\n" +
+        "        <td><input id='submit' type='submit' value='提交'/></td>\n" +
+        "    </tr>\n" +
+        "</table>";
+    $("#showData").append(table);
+    $("tr,td").css("text-align","center");
 
+    $("#oldPass").blur(function () {
+            $.ajax({
+                url : "sign/log",
+                type : "post",
+                data : {
+                    username : adminName,
+                    password : $("#oldPass").val()
+                },
+                dataType : "json",
+                success : function(result) {
+                    if (result == "1"){
+                        alert("旧密码错误！");
+                        $("#oldPass").val("");
+                    }
+                },
+                error : function () {
+                    alert("error");
+                }
+            });
+    });
+    $("#submit").click(function () {
+        if ($("#oldPass").val() == "" || $("#newPass").val() == "" || $("#newPass2").val() == "") {
+            alert("输入信息不全！");
+        }else {
+            if ($("#newPass").val() == $("#newPass2").val()) {
+                $.ajax({
+                    url : "sign/update",
+                    type : "post",
+                    data : {
+                        username : adminName,
+                        password : $("#newPass").val()
+                    },
+                    success : function() {
+                        alert("修改成功！");
+                        $(location).attr("href","login.jsp");
+                    },
+                    error : function () {
+                        alert("error");
+                    }
+                });
+            }else {
+                alert("两次输入密码不一致！");
+                $("#newPass2").val("");
+            }
+        }
+    });
+}
 
+/**
+ * 用户修改密码
+ */
+function upUserPass(roomid) {
+    $("#showData").empty();
+    var table = "<table>\n" +
+        "    <tr>\n" +
+        "        <td>旧密码：</td>\n" +
+        "        <td><input type='password' id='oldPas'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>新密码：</td>\n" +
+        "        <td><input type='password' id='newPas'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>确认密码：</td>\n" +
+        "        <td><input type='password' id='newPas2'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td><a href='userIndex.jsp'>取消</a></td>\n" +
+        "        <td><input id='submit' type='submit' value='提交'/></td>\n" +
+        "    </tr>\n" +
+        "</table>";
+    $("#showData").append(table);
+    $("tr,td").css("text-align","center");
 
+    $("#oldPas").blur(function () {
+        $.ajax({
+            url : "room/log",
+            type : "post",
+            data : {
+                roomid : roomid,
+                password : $("#oldPas").val()
+            },
+            success : function(result) {
+                if (result == "1"){
+                    alert("旧密码错误！");
+                    $("#oldPas").val("");
+                }
+            },
+            error : function () {
+                alert("error");
+            }
+        });
+    });
+    $("#submit").click(function () {
+        if ($("#oldPas").val() == "" || $("#newPas").val() == "" || $("#newPas2").val() == "") {
+            alert("输入信息不全！");
+        }else {
+            if ($("#newPas").val() == $("#newPas2").val()) {
+                $.ajax({
+                    url : "room/upUserPass",
+                    type : "post",
+                    data : {
+                        roomid : roomid,
+                        password : $("#newPas").val()
+                    },
+                    success : function() {
+                        alert("修改成功！");
+                        $(location).attr("href","login.jsp");
+                    },
+                    error : function () {
+                        alert("error");
+                    }
+                });
+            }else {
+                alert("两次输入密码不一致！");
+                $("#newPas2").val("");
+            }
+        }
+    });
+}
 
 
 

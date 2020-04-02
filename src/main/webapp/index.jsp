@@ -14,19 +14,7 @@
     <link type="text/css" rel="styleSheet"  href="css/main.css" />
     <title>Students Hostel Manage</title>
 </head>
-<script>
-    $(function(){
-        var username = '<%= session.getAttribute("user")%>';
-        if (username == 'null'){
-            $("nav").empty().append("<a> <img src=\"images/logo.png\" style=\"width: 229px;height: 63.85px;\"/></a>" +
-                "<a id='meg' style='margin-left: 30%'>你还未登录！3秒后跳转至登录！</a> ");
-            $("#meg").css({"color":"red"});
-            setTimeout(function () {
-                $(location).attr("href","login.jsp");
-            },3000);
-        }
-    });
-</script>
+
 <body>
 <%--头部导航栏--%>
 <div id="header">
@@ -35,19 +23,23 @@
             <img src="images/logo.png" style="width: 229px;height: 63.85px;"/>
         </a>
         <a>
-<%--            <iframe width="450" scrolling="no" height="18" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=1&color=%230070C0&icon=1&wind=1&num=2&site=12"></iframe>--%>
+            <%--            <iframe width="450" scrolling="no" height="18" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=1&color=%230070C0&icon=1&wind=1&num=2&site=12"></iframe>--%>
         </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a>
             <button id="addVisitor" onclick="addVisit()">来访登记</button>
         </a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a>
-            <button id="adminName"><%=request.getSession().getAttribute("user") %></button>
-        </a>
-        <a>
-            <button onclick="logout()">退出</button>
-        </a>
+        <div id="perInfo">
+            <a>
+                <button id="adminName">你好：<%=request.getSession().getAttribute("user") %></button>
+            </a>
+            <a>
+                <button onclick="upAdminPass(<%=request.getSession().getAttribute("user") %>)">修改密码</button>
+            </a>
+            <a>
+                <button onclick="logout()">退出</button>
+            </a>
+        </div>
     </nav>
 </div>
 <%--侧边导航栏--%>
@@ -69,13 +61,7 @@
             <a onclick="showVisitorTable()" id="visitorInfo">Visitor Info</a>
         </li>
         <li>
-            <a href="testlist.jsp">page</a>
-        </li>
-        <li>
-            <a href="tan.jsp">tanchuang</a>
-        </li>
-        <li>
-            <a href="login1.jsp">Sign in</a>
+            <a onclick="repairTable()" id="repairInfo">Repair Info</a>
         </li>
     </ul>
 </div>
@@ -83,6 +69,7 @@
 <div id="section">
     <%--  显示logo  --%>
     <div id="showData" style="display: block;"><img src="images/8.png" width="100%"/></div>
+    <div id="showRepair" style="display: block;"></div>
     <%--  宿舍详情弹窗  --%>
     <div class="wrap-box" id="dia" style="display: none;"><!--最外层包裹框，背景图片很鲜艳亮眼position:fixed-->
         <div class='login-box'><!--表单框部分position:fixed-->
@@ -128,6 +115,55 @@
 </div>
 <script>
     $("#caiDan").focus(caiDan());
+</script>
+<script>
+    $(function(){
+        var username = '<%= session.getAttribute("user")%>';
+        if (username == 'null'){
+            $("nav").empty().append("<a> <img src=\"images/logo.png\" style=\"width: 229px;height: 63.85px;\"/></a>" +
+                "<a id='meg' style='margin-left: 30%'>你还未登录！3秒后跳转至登录！</a> ");
+            $("#meg").css({"color":"red"});
+            setTimeout(function () {
+                $(location).attr("href","login.jsp");
+            },3000);
+        }
+
+        //加载报修信息
+        //清空盒子
+        $("#showRepair").empty();
+        var tablehead = "<table width='100%'>\n" +
+            "    <thead>\n" +
+            "    <tr><th colspan='2' style='color: red'>待办</th></tr>\n" +
+            "    <tr>\n" +
+            "        <th>寝室</th>\n" +
+            "        <th>内容</th>\n" +
+            "    </tr>\n" +
+            "    </thead>\n" +
+            "    <tbody id=\"repairList\">\n" +
+            "    </tbody>\n" +
+            "</table>";
+        $("#showRepair").append(tablehead);
+        //请求数据
+        $.ajax({
+            url : "repair/findAll",
+            type : "get",
+            dataType : "json",
+            success : function(result) {
+                console.log(result);
+                $.each(result, function (n, value) {
+                    if (value.repairState != "0"){
+                        var trs = "<tr><td>" + value.repairName + "</td>" +
+                            "<td>" + value.repairText +"</td></tr>";
+                        $("#repairList").append(trs);
+                        //设置文本居中
+                        $("th,td").css("text-align","center");
+                    }
+                });
+            }
+        });
+
+
+    });
 </script>
 </body>
 </html>

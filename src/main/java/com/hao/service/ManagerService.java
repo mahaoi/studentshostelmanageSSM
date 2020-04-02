@@ -9,11 +9,14 @@ import com.hao.domain.ManagerInfo;
  */
 public interface ManagerService {
     //用户名检测
-    ManagerInfo testUserName(ManagerInfo managerInfo);
+    ManagerInfo testOldPass(ManagerInfo managerInfo);
 
     //登录用户查询
     ManagerInfo findManager(ManagerInfo managerInfo);
 
     // 保存用户信息
     void saveManager(ManagerInfo managerInfo);
+
+    //修改
+    void update(String username, String password);
 }

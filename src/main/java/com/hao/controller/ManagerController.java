@@ -22,14 +22,9 @@ public class ManagerController {
     @Autowired
     private ManagerService managerService;
 
-    @RequestMapping("/test")
-    public String testUserName(ManagerInfo managerInfo){
-        // 用户名是否存在(0:存在   1:不存在)
-        return managerService.testUserName(managerInfo).getPassword()!=null ? "0" : "1";
-    }
 
     @RequestMapping("/login")
-    public String loginController(ManagerInfo managerInfo, HttpSession session){
+    public String loginManager(ManagerInfo managerInfo, HttpSession session){
         //0：登陆成功  1：登陆失败
         ManagerInfo manager = managerService.findManager(managerInfo);
         if (manager != null){
@@ -39,10 +34,25 @@ public class ManagerController {
         return "1";
     }
 
+    @RequestMapping("/log")
+    public String loginPassTest(ManagerInfo managerInfo){
+        //0：成功  1：失败
+        ManagerInfo manager = managerService.testOldPass(managerInfo);
+        if ((manager.getPassword()).equals(managerInfo.getPassword())){
+            return "0";
+        }
+        return "1";
+    }
+
     @RequestMapping("/add")
-    public String addController(ManagerInfo managerInfo){
+    public String addManager(ManagerInfo managerInfo){
         managerService.saveManager(managerInfo);
         return "0";
+    }
+
+    @RequestMapping("/update")
+    public void upManagerPass(String username,String password){
+        managerService.update(username,password);
     }
 
     @RequestMapping(value = "/logout")

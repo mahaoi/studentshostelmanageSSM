@@ -27,4 +27,12 @@ public interface RoomDao {
     //修改
     @Update("update roominfo set roomin = ${roomIn} where roomid = #{roomid}")
     void update(@Param("roomid")String roomid,@Param("roomIn")String roomIn);
+
+    //登录用户查询
+    @Select("select * from roominfo where roomid = #{roomid} and password = #{password}")
+    RoomInfo findRoom(RoomInfo roomInfo);
+
+    //修改密码
+    @Update("update roominfo set password = #{password} where roomid = #{roomid}")
+    void upPass(@Param("roomid")String roomid, @Param("password")String password);
 }

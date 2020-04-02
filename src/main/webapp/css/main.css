@@ -7,14 +7,14 @@
 #nav {
     line-height:50px;
     background-color:#eeeeee;
-    height:570px;
+    height:550px;
     width:220px;
     text-align:center;
     float:left;
     padding:5px;
 }
 #section {
-    width:1200px;
+    width:1269px;
     float:left;
     padding:10px;
 }
@@ -33,3 +33,24 @@ ul {
 }
 
 .clkFontColor {color: #8734ff}
+
+#showData {
+    float: left;
+    width: 80%;
+}
+
+#showRepair {
+    line-height:50px;
+    background-color:#eeeeee;
+    height:550px;
+    width:220px;
+    text-align:center;
+    float:right;
+    padding:5px;
+    margin-top: -7px;
+}
+
+#perInfo {
+    float: right;
+    margin-top: 50px;
+}

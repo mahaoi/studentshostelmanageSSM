@@ -11,4 +11,10 @@ import com.hao.domain.RoomInfo;
 public interface RoomService extends BaseService<RoomInfo>{
     //修改
     void update(String roomid,String roomIn);
+
+    //登录用户查询
+    RoomInfo findRoom(RoomInfo roomInfo);
+
+    //修改密码
+    void upPass(String roomid,String password);
 }

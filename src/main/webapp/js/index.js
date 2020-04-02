@@ -134,7 +134,8 @@ $(function() {
                        $(location).attr("href","index.jsp");
                    }else {
                        alert("用户名或密码错误！");
-                      $(location).attr("href","login.jsp");
+                      $("#name").val("");
+                      $("#pass").val("");
                    }
                }
            });
@@ -144,7 +145,31 @@ $(function() {
    });
 
    $("#regBtu").click(function () {
-      alert("注册没写呢~~");
+      //判断用户名和密码是否为空
+      if (($("#regname").val()!="") && ($("#regpass").val()!="")) {
+         $("#null-username-password").text("");
+         //请求
+         $.ajax({
+            url : "room/login",
+            type : "POST",
+            dataType : "json",
+            data : {
+               roomid : $("#regname").val(),
+               password : $("#regpass").val()
+            },
+            success : function(result) {
+               if (result=="0") {
+                  $(location).attr("href","userIndex.jsp");
+               }else {
+                  alert("用户名或密码错误！");
+                  $("#regname").val("");
+                  $("#regpass").val("");
+               }
+            }
+         });
+      }else {
+         $("#null-username-password").text("用户名或密码不能为空").css({"color":"red"});
+      }
    });
 
 });

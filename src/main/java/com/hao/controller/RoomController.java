@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,5 +75,31 @@ public class RoomController {
     @RequestMapping("/updateRoomIn")
     public void updateRoomIn(String roomid,String roomin){
         roomService.update(roomid,roomin);
+    }
+
+    @RequestMapping("/login")
+    public String loginRoom(RoomInfo roomInfo, HttpSession session){
+        //0：登陆成功  1：登陆失败
+        RoomInfo room = roomService.findRoom(roomInfo);
+        if (room != null){
+            session.setAttribute("room",room.getRoomid());
+            return "0";
+        }
+        return "1";
+    }
+
+    @RequestMapping("/log")
+    public String oldPassTest(RoomInfo roomInfo){
+        //0：成功  1：失败
+        RoomInfo room = roomService.findRoom(roomInfo);
+        if (room != null){
+            return "0";
+        }
+        return "1";
+    }
+
+    @RequestMapping("/upUserPass")
+    public void upUserPass(String roomid,String password){
+        roomService.upPass(roomid,password);
     }
 }

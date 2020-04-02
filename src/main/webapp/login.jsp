@@ -19,7 +19,7 @@
 
 <div class="materialContainer">
     <div class="box">
-        <div class="title">登录</div>
+        <div class="title">管理员登录</div>
         <div class="input">
             <label for="name">用户名</label>
             <input type="text" name="name" id="name">
@@ -44,7 +44,7 @@
         <div class="material-button alt-2">
             <span class="shape"></span>
         </div>
-        <div class="title">注册</div>
+        <div class="title">用户登录</div>
         <div class="input">
             <label for="regname">用户名</label>
             <input type="text" name="regname" id="regname">
@@ -55,14 +55,9 @@
             <input type="password" name="regpass" id="regpass">
             <span class="spin"></span>
         </div>
-        <div class="input">
-            <label for="reregpass">确认密码</label>
-            <input type="password" name="reregpass" id="reregpass">
-            <span class="spin"></span>
-        </div>
         <div class="button">
             <button id="regBtu">
-                <span>注册</span>
+                <span>登录</span>
             </button>
         </div>
     </div>

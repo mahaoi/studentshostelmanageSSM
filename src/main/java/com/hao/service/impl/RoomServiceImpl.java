@@ -38,4 +38,14 @@ public class RoomServiceImpl implements RoomService {
     public int insert(RoomInfo roomInfo) {
         return 0;
     }
+
+    @Override
+    public RoomInfo findRoom(RoomInfo roomInfo) {
+        return roomDao.findRoom(roomInfo);
+    }
+
+    @Override
+    public void upPass(String roomid, String password) {
+        roomDao.upPass(roomid,password);
+    }
 }

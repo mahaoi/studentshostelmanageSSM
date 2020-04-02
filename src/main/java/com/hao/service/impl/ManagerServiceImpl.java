@@ -18,8 +18,8 @@ public class ManagerServiceImpl implements ManagerService {
     private ManagerDao managerDao;
 
     @Override
-    public ManagerInfo testUserName(ManagerInfo managerInfo) {
-        return managerDao.testUserName(managerInfo);
+    public ManagerInfo testOldPass(ManagerInfo managerInfo) {
+        return managerDao.testOldPass(managerInfo);
     }
 
     @Override
@@ -30,5 +30,10 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public void saveManager(ManagerInfo managerInfo) {
         managerDao.saveManager(managerInfo);
+    }
+
+    @Override
+    public void update(String username, String password) {
+        managerDao.update(username,password);
     }
 }

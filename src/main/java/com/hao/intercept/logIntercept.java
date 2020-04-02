@@ -23,7 +23,11 @@ public class logIntercept implements HandlerInterceptor {
         }
         // 获取Session
         Object object = request.getSession().getAttribute("user");
-        if (object!=null) {
+        if (object != null) {
+            return true;
+        }
+        Object obj = request.getSession().getAttribute("room");
+        if (obj != null) {
             return true;
         }
         // 不符合条件的，跳转到登录界面

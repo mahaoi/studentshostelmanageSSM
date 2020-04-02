@@ -1,6 +1,5 @@
 package com.hao.domain;
 
-import lombok.Data;
 
 import java.io.Serializable;
 
