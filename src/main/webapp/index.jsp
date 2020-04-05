@@ -23,7 +23,7 @@
             <img src="images/logo.png" style="width: 229px;height: 63.85px;"/>
         </a>
         <a>
-            <%--            <iframe width="450" scrolling="no" height="18" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=1&color=%230070C0&icon=1&wind=1&num=2&site=12"></iframe>--%>
+            <%--<iframe width="450" scrolling="no" height="18" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=1&color=%230070C0&icon=1&wind=1&num=2&site=12"></iframe>--%>
         </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a>
