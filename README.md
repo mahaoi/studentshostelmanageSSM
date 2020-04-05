@@ -1,3 +1,6 @@
 # studentshostelmanageSSM
-jquer+ssm+mysql
-完成了简单的注册登录
+jquer3.3.1
+Tomcat8.5.12
+maven3.3.9
+ssm
+mysql5.1.17
