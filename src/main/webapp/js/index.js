@@ -134,7 +134,6 @@ $(function() {
                        $(location).attr("href","index.jsp");
                    }else {
                        alert("用户名或密码错误！");
-                      $("#name").val("");
                       $("#pass").val("");
                    }
                }
@@ -163,7 +162,6 @@ $(function() {
                }else {
                   alert("用户名或密码错误！");
                   $("#regname").val("");
-                  $("#regpass").val("");
                }
             }
          });

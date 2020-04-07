@@ -20,6 +20,7 @@
     </context:component-scan>
 
     <!--Spring整合MyBatis框架-->
+    <!--    39.99.154.0-->
     <!--配置连接池-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
