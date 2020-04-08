@@ -32,7 +32,6 @@ public class RoomController {
     @Autowired
     private Room_StuService room_stuService;
 
-    //查询所有房间
     @RequestMapping("/findAllRoom")
     public String findAll(){
         //房间信息list
@@ -65,13 +64,11 @@ public class RoomController {
         return JSON.toJSON(nullRoomList).toString();
     }
 
-    //删除宿舍
     @RequestMapping("/del")
     public void delRoom(String roomid){
         roomService.delete(roomid);
     }
 
-    //修改宿舍可入住人数
     @RequestMapping("/updateRoomIn")
     public void updateRoomIn(String roomid,String roomin){
         roomService.update(roomid,roomin);

@@ -30,7 +30,10 @@ public class StuController {
     @Autowired
     private Room_StuService room_stuService;
 
-    //查询所有
+    /**
+     * 查询所有
+     * @return
+     */
     @RequestMapping("/findAll")
     public String findAll(){
         List<StudentInfo> list = stuService.findAll();
@@ -51,39 +54,71 @@ public class StuController {
         return JSON.toJSON(objectList).toString();
     }
 
-    //未分配学生
+    /**
+     * 未分配学生
+     * @param state
+     * @return
+     */
     @RequestMapping("/findByState")
     public String findByState(String state){
         return JSON.toJSON(stuService.findByState(state)).toString();
     }
 
-    //姓名模糊查询
+    /**
+     * 姓名模糊查询
+     * @param name
+     * @return
+     */
     @RequestMapping("/findByName")
     public String findByName(String name){
         return JSON.toJSON(stuService.findByName(name)).toString();
     }
 
-    //学号查询
+    /**
+     * 学号查询
+     * @param id
+     * @return
+     */
     @RequestMapping("/findById")
     public String findById(String id){
         return JSON.toJSON(stuService.findById(id)).toString();
     }
 
-    //班级查询
+    /**
+     * 班级查询
+     * @param classes
+     * @return
+     */
     @RequestMapping("/findByClass")
     public String findByClass(String classes){
         return JSON.toJSON(stuService.findByClass(classes)).toString();
     }
 
-    //根据学号删除
+    /**
+     * 根据学号删除
+     * @param id
+     */
     @RequestMapping("/del")
     public void delById(String id){
         stuService.delete(id);
     }
 
-    //设置学生状态
+    /**
+     * 设置学生状态
+     * @param state
+     * @param id
+     */
     @RequestMapping("/upstate")
     public void upState(String state,String id){
         stuService.upState(state,id);
+    }
+
+    /**
+     * 添加学生
+     * @param studentInfo
+     */
+    @RequestMapping("/add")
+    public void addStu(StudentInfo studentInfo){
+        stuService.insert(studentInfo);
     }
 }

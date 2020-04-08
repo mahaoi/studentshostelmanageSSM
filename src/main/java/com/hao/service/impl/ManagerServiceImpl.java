@@ -6,6 +6,8 @@ import com.hao.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author guoguo
  * @version 1.0
@@ -28,12 +30,22 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public void saveManager(ManagerInfo managerInfo) {
-        managerDao.saveManager(managerInfo);
+    public void update(String username, String password) {
+        managerDao.update(username,password);
     }
 
     @Override
-    public void update(String username, String password) {
-        managerDao.update(username,password);
+    public void delete(String id) {
+        managerDao.delete(id);
+    }
+
+    @Override
+    public int insert(ManagerInfo managerInfo) {
+        return managerDao.insert(managerInfo);
+    }
+
+    @Override
+    public List<ManagerInfo> findAll() {
+        return managerDao.findAll();
     }
 }

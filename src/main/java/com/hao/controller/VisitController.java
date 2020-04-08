@@ -24,13 +24,21 @@ public class VisitController {
     @Autowired
     private VisitService visitService;
 
-    //查询所有
+    /**
+     * 查询所有
+     * @return
+     */
     @RequestMapping("/findAll")
     public String findAll(){
         return JSON.toJSON(visitService.findAll()).toString();
     }
 
-    //插入记录
+    /**
+     * 插入记录
+     * @param visitName
+     * @param visitPhone
+     * @param visitRemarks
+     */
     @RequestMapping("/add")
     public void add(String visitName,String visitPhone,String visitRemarks){
         Date date = new Date();

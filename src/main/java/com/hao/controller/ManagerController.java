@@ -1,5 +1,6 @@
 package com.hao.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.hao.domain.ManagerInfo;
 import com.hao.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
  * @date 2020/4/1 16:31
  */
 @Controller
-@RequestMapping("/sign")
+@RequestMapping(value = "/sign",produces = "text/json;charset=UTF-8")
 @ResponseBody
 public class ManagerController {
 
@@ -45,9 +46,8 @@ public class ManagerController {
     }
 
     @RequestMapping("/add")
-    public String addManager(ManagerInfo managerInfo){
-        managerService.saveManager(managerInfo);
-        return "0";
+    public void addManager(ManagerInfo managerInfo){
+        managerService.insert(managerInfo);
     }
 
     @RequestMapping("/update")
@@ -59,5 +59,15 @@ public class ManagerController {
     public void logout(HttpSession session) throws Exception {
         // 清除Session
         session.invalidate();
+    }
+
+    @RequestMapping("/findAll")
+    public String findAllManager() {
+        return JSON.toJSON(managerService.findAll()).toString();
+    }
+
+    @RequestMapping("/del")
+    public void delManager(String username){
+        managerService.delete(username);
     }
 }

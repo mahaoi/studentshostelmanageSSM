@@ -561,6 +561,117 @@ function addVisit() {
 }
 
 /**
+ * 添加学生
+ */
+function addStu() {
+    $("#showData").empty();
+    var table = "<table>\n" +
+        "    <tr>\n" +
+        "        <td>学号：</td>\n" +
+        "        <td><input id='stuId'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>姓名：</td>\n" +
+        "        <td><input id='stuName'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>性别：</td>\n" +
+        "        <td><input id='stuSex'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>专业：</td>\n" +
+        "        <td><input id='stuMajor'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>班级：</td>\n" +
+        "        <td><input id='stuClasses'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>电话：</td>\n" +
+        "        <td><input id='stuPhone'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td></td>\n" +
+        "        <td><input id='submit' type='submit' value='提交'/></td>\n" +
+        "    </tr>\n" +
+        "</table>";
+    $("#showData").append(table);
+    $("tr,td").css("text-align","center");
+    $("#submit").click(function () {
+        $.ajax({
+            url : "stu/add",
+            type : "post",
+            data : {
+                id : $("#stuId").val(),
+                name : $("#stuName").val(),
+                sex : $("#stuSex").val(),
+                major : $("#stuMajor").val(),
+                classes : $("#stuClasses").val(),
+                phone : $("#stuPhone").val(),
+                state : "1"
+            },
+            success : function() {
+                if(confirm("学生信息录入成功！\n是否继续录入？")){
+                    addStu();
+                }else {
+                    UnallocatedStudentTable();
+                }
+            },
+            error : function () {
+                alert("error");
+            }
+        });
+    });
+}
+
+/**
+ * root用户添加管理员
+ */
+function addMan(data) {
+    if (data != "root"){
+        alert("权限不足！");
+    }else {
+        $("#showData").empty();
+        var table = "<table>\n" +
+            "    <tr>\n" +
+            "        <td>用户名：</td>\n" +
+            "        <td><input id='userName'/></td>\n" +
+            "    </tr>\n" +
+            "    <tr>\n" +
+            "        <td>密码：</td>\n" +
+            "        <td><input id='pass'/></td>\n" +
+            "    </tr>\n" +
+            "    <tr>\n" +
+            "        <td></td>\n" +
+            "        <td><input id='submit' type='submit' value='提交'/></td>\n" +
+            "    </tr>\n" +
+            "</table>";
+        $("#showData").append(table);
+        $("tr,td").css("text-align","center");
+        $("#submit").click(function () {
+            $.ajax({
+                url : "sign/add",
+                type : "post",
+                data : {
+                    username : $("#userName").val(),
+                    password : $("#pass").val()
+                },
+                success : function() {
+                    if(confirm("管理员添加成功！\n是否继续录入？")){
+                        addMan();
+                    }else {
+                        showManagerInfo(data);
+                    }
+                },
+                error : function () {
+                    alert("error");
+                }
+            });
+        });
+    }
+}
+
+/**
  * admin页面报修信息
  */
 function repairTable() {
@@ -609,6 +720,86 @@ function repairTable() {
         }
     });
 }
+
+/**
+ * 管理员列表
+ */
+function showManagerInfo(data) {
+    if (data != "root"){
+        alert("权限不足！");
+    }else {
+        $("#managerInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
+        //清空盒子
+        $("#showData").empty();
+        var tablehead = "<input type='text' id='findManager' placeholder='请输入查询内容'/>" +
+            "<table width='100%'>\n" +
+            "    <thead>\n" +
+            "    <tr>\n" +
+            "        <th>姓名</th>\n" +
+            "        <th>密码</th>\n" +
+            "        <th>操作</th>\n" +
+            "    </tr>\n" +
+            "    </thead>\n" +
+            "    <tbody id=\"managerList\">\n" +
+            "    </tbody>\n" +
+            "</table>";
+        $("#showData").append(tablehead);
+        //请求数据
+        $.ajax({
+            url : "sign/findAll",
+            type : "get",
+            dataType : "json",
+            success : function(result) {
+                $.each(result, function (n, value) {
+                    var trs = "<tr><td>" + value.username + "</td>" +
+                        "<td>" + value.password +"</td>" +
+                        "<td><button onclick='delMan("+value.username+")'>删除</button><td></tr>";
+                    $("#managerList").append(trs);
+                    //设置文本居中
+                    $("th,td").css("text-align","center");
+                });
+            }
+        });
+        //通过输入框输入内容过滤表格
+        $('#findManager').on('input propertychange', function() {
+            console.log( $(this).val());
+            $('table tbody tr').hide()
+                .filter(":contains('" + ($(this).val()) + "')")
+                .show();
+        });
+    }
+}
+
+/**
+ * 管理员删除
+ * @param data
+ */
+function delMan(data) {
+    if(confirm("确定删除该管理员吗？")){
+        $.ajax({
+            url : "sign/del",
+            type : "post",
+            data : {username  : data},
+            success : function() {
+                alert("删除成功！");
+                showManagerInfo(data);
+            }
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**

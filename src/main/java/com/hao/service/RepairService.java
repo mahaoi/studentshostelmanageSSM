@@ -11,9 +11,16 @@ import java.util.List;
  */
 public interface RepairService extends BaseService<Repair> {
 
-    //查询单个宿舍的报修记录
+    /**
+     * 查询单个宿舍的报修记录
+     * @param repairName
+     * @return
+     */
     List<Repair> findByRoomId(String repairName);
 
-    //修改状态
+    /**
+     * 修改状态
+     * @param repair
+     */
     void upState(Repair repair);
 }

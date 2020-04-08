@@ -61,6 +61,6 @@ public class StuServiceImpl implements StuService {
 
     @Override
     public int insert(StudentInfo studentInfo) {
-        return 0;
+        return stuDao.insert(studentInfo);
     }
 }

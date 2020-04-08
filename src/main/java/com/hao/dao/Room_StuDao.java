@@ -15,7 +15,11 @@ import java.util.List;
 @Repository
 public interface Room_StuDao {
 
-    //查询已入住
+    /**
+     * 查询已入住
+     * @param roomid
+     * @return
+     */
     @Select("select * from room_stu where roomid=#{roomid}")
     @Results({
             @Result(id = true,column = "rsid",property = "rsid"),
@@ -26,27 +30,50 @@ public interface Room_StuDao {
     })
     List<Room_Stu> findByRoomid(String roomid);
 
-    //每个宿舍已入住人数
+    /**
+     * 每个宿舍已入住人数
+     * @param roomid
+     * @return
+     */
     @Select("select count(*) from room_stu where roomid=#{roomid}")
     Integer stuCount(String roomid);
 
-    //查询宿舍号
+    /**
+     * 查询宿舍号
+     * @param id
+     * @return
+     */
     @Select("select roomid from room_stu where id=#{id}")
     String findRoomidById(String id);
 
-    //移除学生
+    /**
+     * 移除学生
+     * @param id
+     */
     @Delete("delete from room_stu where id=#{id}")
     void delete(String id);
 
-    //查询宿舍学生学号
+    /**
+     * 查询宿舍学生学号
+     * @param roomId
+     * @return
+     */
     @Select("SELECT id FROM room_stu WHERE roomid=#{roomId}")
     List<Room_Stu> findIdList(String roomId);
 
-    //插入记录
+    /**
+     * 插入记录
+     * @param room_stu
+     * @return
+     */
     @Insert("insert into room_stu (roomid,id) values (#{roomid},#{id})")
     int insert(Room_Stu room_stu);
 
-    //修改
+    /**
+     * 修改
+     * @param roomid
+     * @param id
+     */
     @Update("update room_stu set roomid = #{roomid} where id = #{id}")
     void update(@Param("roomid")String roomid,@Param("id")String id);
 }

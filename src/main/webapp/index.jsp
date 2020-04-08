@@ -29,6 +29,12 @@
         <a>
             <button id="addVisitor" onclick="addVisit()">来访登记</button>
         </a>
+        <a>
+            <button id="addStu" onclick="addStu()">添加学生</button>
+        </a>
+        <a>
+            <button id="addMan" onclick="addMan('<%=request.getSession().getAttribute("user") %>')">添加管理员</button>
+        </a>
         <div id="perInfo">
             <a>
                 <button id="adminName">你好：<%=request.getSession().getAttribute("user") %></button>
@@ -62,6 +68,9 @@
         </li>
         <li>
             <a onclick="repairTable()" id="repairInfo">Repair Info</a>
+        </li>
+        <li>
+            <a onclick="showManagerInfo('<%=request.getSession().getAttribute("user") %>')" id="managerInfo">Manager Info</a>
         </li>
     </ul>
 </div>
