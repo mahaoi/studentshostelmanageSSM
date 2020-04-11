@@ -36,7 +36,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public int insert(RoomInfo roomInfo) {
-        return 0;
+        return roomDao.insert(roomInfo);
     }
 
     @Override

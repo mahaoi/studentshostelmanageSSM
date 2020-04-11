@@ -135,7 +135,6 @@ function showRoomTable() {
     $("#roomInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
     //清空盒子
     $("#showData").empty();
-    // $("#showRoomTable").css("display","block");
     var tablehead = "<input type='text' id='findRoom' placeholder='请输入查询内容'/>" +
         "<table width='100%'>\n" +
         "    <thead>\n" +
@@ -162,7 +161,7 @@ function showRoomTable() {
             console.log(result);
             $.each(result, function (n, value) {
                 // alert(n + ' ' + value);
-                if (value.remarks == null){
+                if (value.remarks == "" || value.remarks == null){
                     value.remarks = "无";
                 }
                 var trs = "<tr><td>" + value.roomid + "</td>" +
@@ -598,6 +597,17 @@ function addStu() {
     $("#showData").append(table);
     $("tr,td").css("text-align","center");
     $("#submit").click(function () {
+        var meg = "";
+        $("input").each(function () {
+            if ($(this).val()==""){
+                meg = "1";
+                $(this).parent().css("border","1px solid red");
+            }
+        });
+        if (meg=="1"){
+            alert("输入信息不全！");
+            return;
+        }
         $.ajax({
             url : "stu/add",
             type : "post",
@@ -624,12 +634,70 @@ function addStu() {
     });
 }
 
+
+/**
+ * 添加寝室
+ */
+function addRoom() {
+    $("#showData").empty();
+    var table = "<table>\n" +
+        "    <tr>\n" +
+        "        <td>寝室编号：</td>\n" +
+        "        <td><input id='roomId'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>可入住人数：</td>\n" +
+        "        <td><input id='roomIn'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>寝室密码：</td>\n" +
+        "        <td><input id='roomPass'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>备注：</td>\n" +
+        "        <td><input id='roomRem'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td></td>\n" +
+        "        <td><input id='submit' type='submit' value='提交'/></td>\n" +
+        "    </tr>\n" +
+        "</table>";
+    $("#showData").append(table);
+    $("tr,td").css("text-align","center");
+    $("#submit").click(function () {
+        if ($("#roomIn").val() > 8 || $("#roomIn").val() == ""){
+            alert("可入住人数设置错误");
+            $("#roomIn").val("");
+            return;
+        }
+        $.ajax({
+            url : "room/add",
+            type : "post",
+            data : {
+                roomid : $("#roomId").val(),
+                roomin : $("#roomIn").val(),
+                password : $("#roomPass").val(),
+                remarks : $("#roomRem").val()
+            },
+            success : function() {
+                if(confirm("寝室添加成功！\n是否继续添加？")){
+                    addRoom();
+                }else {
+                    showRoomTable();
+                }
+            },
+            error : function () {
+                alert("error");
+            }
+        });
+    });
+}
 /**
  * root用户添加管理员
  */
 function addMan(data) {
     if (data != "root"){
-        alert("权限不足！");
+        alert("权限不足！请联系银河领主小浩！");
     }else {
         $("#showData").empty();
         var table = "<table>\n" +
@@ -639,7 +707,7 @@ function addMan(data) {
             "    </tr>\n" +
             "    <tr>\n" +
             "        <td>密码：</td>\n" +
-            "        <td><input id='pass'/></td>\n" +
+            "        <td><input id='pass' type='password'/></td>\n" +
             "    </tr>\n" +
             "    <tr>\n" +
             "        <td></td>\n" +
@@ -658,7 +726,7 @@ function addMan(data) {
                 },
                 success : function() {
                     if(confirm("管理员添加成功！\n是否继续录入？")){
-                        addMan();
+                        addMan("root");
                     }else {
                         showManagerInfo(data);
                     }
@@ -726,7 +794,7 @@ function repairTable() {
  */
 function showManagerInfo(data) {
     if (data != "root"){
-        alert("权限不足！");
+        alert("权限不足！请联系银河领主小浩！");
     }else {
         $("#managerInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
         //清空盒子
@@ -782,7 +850,7 @@ function delMan(data) {
             data : {username  : data},
             success : function() {
                 alert("删除成功！");
-                showManagerInfo(data);
+                showManagerInfo("root");
             }
         });
     }

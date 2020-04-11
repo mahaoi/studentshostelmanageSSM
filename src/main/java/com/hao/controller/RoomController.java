@@ -41,9 +41,9 @@ public class RoomController {
         for (RoomInfo room : list) {
             Map<String,Object> map = new HashMap();
             map.put("roomid",room.getRoomid());
-            map.put("in",room.getIn());
+            map.put("in",room.getRoomin());
             map.put("ining",room_stuService.stuCount(room.getRoomid()));
-            map.put("surplus",room.getIn()-room_stuService.stuCount(room.getRoomid()));
+            map.put("surplus",room.getRoomin()-room_stuService.stuCount(room.getRoomid()));
             map.put("password",room.getPassword());
             map.put("remarks",room.getRemarks());
             //添加至objectList
@@ -58,7 +58,7 @@ public class RoomController {
         List<RoomInfo> list = roomService.findAll();
         //使用filter()过滤List
         List<RoomInfo> nullRoomList = list.stream().filter(
-                room -> room.getIn() - room_stuService.stuCount(room.getRoomid())!=0
+                room -> room.getRoomin() - room_stuService.stuCount(room.getRoomid())!=0
         ).collect(Collectors.toList());
         //List转json
         return JSON.toJSON(nullRoomList).toString();
@@ -98,5 +98,10 @@ public class RoomController {
     @RequestMapping("/upUserPass")
     public void upUserPass(String roomid,String password){
         roomService.upPass(roomid,password);
+    }
+
+    @RequestMapping("/add")
+    public void addRoom(RoomInfo roomInfo){
+        roomService.insert(roomInfo);
     }
 }

@@ -30,10 +30,13 @@
             <button id="addVisitor" onclick="addVisit()">来访登记</button>
         </a>
         <a>
-            <button id="addStu" onclick="addStu()">添加学生</button>
+            <button id="addStu" onclick="addStu()">学生添加</button>
         </a>
         <a>
-            <button id="addMan" onclick="addMan('<%=request.getSession().getAttribute("user") %>')">添加管理员</button>
+            <button id="addRoom" onclick="addRoom()">寝室添加</button>
+        </a>
+        <a>
+            <button id="addMan" onclick="addMan('<%=request.getSession().getAttribute("user") %>')">管理员添加</button>
         </a>
         <div id="perInfo">
             <a>
@@ -120,7 +123,7 @@
 </div>
 <%--下边版权信息--%>
 <div id="footer">
-    Copyright ? 2020 <a id="caiDan">果果妞妞</a>
+    Copyright ? 2020 <a id="caiDan">果果妞妞</a> | 银河领主小浩
 </div>
 <script>
     $("#caiDan").focus(caiDan());

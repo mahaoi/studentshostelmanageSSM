@@ -9,10 +9,22 @@ import java.io.Serializable;
  * @date 2020/3/15 19:16
  */
 public class RoomInfo implements Serializable {
-    private String roomid;//宿舍编号
-    private Integer roomin;//可入住人数
-    private String password;//密码
-    private String remarks;//备注
+    /**
+     * 宿舍编号
+     */
+    private String roomid;
+    /**
+     * 可入住人数
+     */
+    private Integer roomin;
+    /**
+     * 密码
+     */
+    private String password;
+    /**
+     * 备注
+     */
+    private String remarks;
 
     public String getRoomid() {
         return roomid;
@@ -22,12 +34,12 @@ public class RoomInfo implements Serializable {
         this.roomid = roomid;
     }
 
-    public Integer getIn() {
+    public Integer getRoomin() {
         return roomin;
     }
 
-    public void setIn(Integer in) {
-        this.roomin = in;
+    public void setRoomin(Integer roomin) {
+        this.roomin = roomin;
     }
 
     public String getPassword() {
@@ -50,7 +62,7 @@ public class RoomInfo implements Serializable {
     public String toString() {
         return "RoomInfo{" +
                 "roomid='" + roomid + '\'' +
-                ", in=" + roomin +
+                ", roomin=" + roomin +
                 ", password='" + password + '\'' +
                 ", remarks='" + remarks + '\'' +
                 '}';
