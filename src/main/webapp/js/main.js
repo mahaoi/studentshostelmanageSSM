@@ -255,13 +255,16 @@ function upRoom(roomid) {
         "<option value='7'>7</option>";
     $("#update").empty().append(str);
 
-    $("#diaStu").append("<button id='okBtu'>确定</button>");
+    $("#diaStu").append("<button id='okBtu'>确定</button><button id='unBtu'>取消</button>");
     //获取选择的值
     $("#update").change(function(){
         $("#okBtu").click(function () {
             dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
             updateRoomIn(roomid,$("#update").val());
         });
+    });
+    $("#unBtu").click(function () {
+        dia.style.display = 'none';
     });
 }
 function updateRoomIn(roomid,roomIn) {
