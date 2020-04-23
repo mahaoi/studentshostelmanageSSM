@@ -82,14 +82,13 @@ function del(id) {
     }
 }
 /**
- * 更新学生信息
+ * 学生换宿
  */
 function up(id) {
-    //弹出div
+    showTanChuang();
     var dia = document.getElementById('diaStu');
-    dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
     //清楚无用子节点
-    $("#update").empty().append("<option>请选择宿舍号</option>");
+    $("#update").empty().append("<option>请选择宿舍号</option></br>");
     //查询拥有空床位的宿舍号
     $.ajax({
         url : "room/checkIn",
@@ -105,7 +104,10 @@ function up(id) {
             alert("error");
         }
     });
-    $("#diaStu").append("<button id='checkInOk'>确定</button>");
+    $("#diaStu").append("<button id='checkInOk'>确定</button><button id='checkInNo'>取消</button>");
+    $("#checkInNo").click(function () {
+        dia.style.display = 'none';
+    });
     //获取选择的值
     $("#update").change(function(){
         $("#checkInOk").click(function () {
@@ -170,7 +172,7 @@ function showRoomTable() {
                     "<td>" + value.surplus + "</td>" +
                     "<td>" + value.password + "</td>" +
                     "<td>" + value.remarks + "</td>" +
-                    "<td><button onclick='moreInfo(\""+value.roomid+"\")'>详情</button><button onclick='upRoom(\""+value.roomid+"\")'>更新</button><button onclick='delRoom(\""+value.roomid+"\")'>删除</button></td></tr>";
+                    "<td><button onclick='moreInfo(\""+value.roomid+"\")'>详情</button><button onclick='upRoom(\""+value.roomid+"\",\""+value.ining+"\")'>更新</button><button onclick='delRoom(\""+value.roomid+"\")'>删除</button></td></tr>";
                 $("#roomlist").append(trs);
                 //设置文本居中
                 $("th,td").css("text-align","center");
@@ -202,12 +204,11 @@ function moreInfo(roomid) {
         dataType : "json",
         success : function(result) {
             //设置清单头部信息  宿舍编号和宿舍已入住人数
-            $("#roomId").text("宿舍:"+roomid);
-            $("#roomIn").text("已入住"+result.length+"人");
+            $("#roomId").text("宿舍:"+roomid).css("color","#ffffff");
+            $("#roomIn").text("已入住"+result.length+"人").css("color","#ffffff");
             $.each(result, function (n, value) {
                 if (value == ""){
                     $("#ok").click(function () {
-                        var dia = document.getElementById('dia');
                         dia.style.display = 'none';
                     });
                 } else {
@@ -224,7 +225,6 @@ function moreInfo(roomid) {
 }
 function moreInfo2(result) {
     $.each(result, function (n, value) {
-        // alert(n + ' ' + value);
         var trs = "<tr><td>" + value.id + "</td>" +
             "<td>" + value.major + "</td>" +
             "<td>"+value.name+"</td>" +
@@ -240,20 +240,15 @@ function moreInfo2(result) {
 /**
  * 修改宿舍可入住人数
  */
-function upRoom(roomid) {
-    //弹出div
+function upRoom(roomid,ining) {
+    showTanChuang();
     var dia = document.getElementById('diaStu');
-    dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
     //清楚无用子节点
-    var str = "<option>请选择可入住人数</option>" +
-        "<option value='1'>1</option>" +
-        "<option value='2'>2</option>" +
-        "<option value='3'>3</option>" +
-        "<option value='4'>4</option>" +
-        "<option value='5'>5</option>" +
-        "<option value='6'>6</option>" +
-        "<option value='7'>7</option>";
-    $("#update").empty().append(str);
+    $("#update").empty().append("<option>请选择可入住人数</option>");
+    for (ining;ining <= 7;ining++) {
+        var str = "<option value='" + ining + "'>" + ining + "</option>";
+        $("#update").append(str);
+    }
 
     $("#diaStu").append("<button id='okBtu'>确定</button><button id='unBtu'>取消</button>");
     //获取选择的值
@@ -415,9 +410,8 @@ function UnallocatedStudentTable() {
  * 宿舍分配
  */
 function checkIn(id) {
-    //弹出div
+    showTanChuang();
     var dia = document.getElementById('diaStu');
-    dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
     //清楚无用子节点
     $("#update").empty().append("<option>请选择宿舍号</option>");
     //查询拥有空床位的宿舍号
@@ -435,7 +429,10 @@ function checkIn(id) {
             alert("error");
         }
     });
-    $("#diaStu").append("<button id='checkInOk'>提交</button>");
+    $("#diaStu").append("<button id='checkInOk'>提交</button><button id='checkInNo'>取消</button>");
+    $("#checkInNo").click(function () {
+        dia.style.display = 'none';
+    });
     //获取选择的值
     $("#update").change(function(){
         $("#checkInOk").click(function () {
@@ -1195,20 +1192,18 @@ function upUserPass(roomid) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * 取消弹窗
+ */
+function showTanChuang() {
+    var str = "<div class='login-box'>\n" +
+        "            <select id=\"update\" style=\"margin-left: 200px;\"></select>\n" +
+        "        </div>"
+    $("#diaStu").empty().append(str);
+    //弹出div
+    var dia = document.getElementById('diaStu');
+    dia.style.display = (dia.style.display == 'none') ? 'block' : 'none';
+}
 
 
 

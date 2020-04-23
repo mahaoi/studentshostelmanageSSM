@@ -43,7 +43,7 @@
                 <button id="adminName">你好：<%=request.getSession().getAttribute("user") %></button>
             </a>
             <a>
-                <button onclick="upAdminPass(<%=request.getSession().getAttribute("user") %>)">修改密码</button>
+                <button onclick="upAdminPass('<%=request.getSession().getAttribute("user") %>')">修改密码</button>
             </a>
             <a>
                 <button onclick="logout()">退出</button>
@@ -113,11 +113,10 @@
             </table>
         </div>
     </div>
-    <%--  学生分配宿舍弹窗      --%>
+    <%--  弹窗  --%>
     <div class="wrap-box" id="diaStu" style="display: none;"><!--最外层包裹框，背景图片很鲜艳亮眼position:fixed-->
         <div class='login-box'><!--登录表单框部分position:fixed-->
-            <select id="update" style="margin-left: 200px;">
-            </select>
+            <select id="update" style="margin-left: 200px;"></select>
         </div>
     </div>
 </div>
