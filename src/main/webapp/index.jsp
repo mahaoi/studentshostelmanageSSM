@@ -38,6 +38,9 @@
         <a>
             <button id="addMan" onclick="addMan('<%=request.getSession().getAttribute("user") %>')">管理员添加</button>
         </a>
+        <a>
+            <input type='text' id='findBy' placeholder='请输入查询内容'/>
+        </a>
         <div id="perInfo">
             <a>
                 <button id="adminName">你好：<%=request.getSession().getAttribute("user") %></button>

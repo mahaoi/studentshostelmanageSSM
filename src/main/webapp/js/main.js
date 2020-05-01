@@ -2,12 +2,11 @@
  * 显示学生数据
  */
 function showStudentTable() {
+    $('#findBy').val("");
     $("#stuInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
     //清空盒子
     $("#showData").empty();
-    // $("#showStudentTable").css("display","block");
-    var tablehead = "<input type='text' id='findBy' placeholder='请输入查询内容'/>" +
-        "<table width='100%'>\n" +
+    var tablehead = "<table width='100%'>\n" +
         "    <thead>\n" +
         "    <tr>\n" +
         "        <th>学号</th>\n" +
@@ -32,7 +31,6 @@ function showStudentTable() {
         success : function(result) {
             console.log(result);
             $.each(result, function (n, value) {
-                // alert(n + ' ' + value);
                 var state = "";
                 if (value.state == '0'){
                     state = "<td style='color: #8734ff'>已分配</td>";
@@ -134,11 +132,11 @@ function up(id) {
  * 显示宿舍数据
  */
 function showRoomTable() {
+    $('#findBy').val("");
     $("#roomInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
     //清空盒子
     $("#showData").empty();
-    var tablehead = "<input type='text' id='findRoom' placeholder='请输入查询内容'/>" +
-        "<table width='100%'>\n" +
+    var tablehead = "<table width='100%'>\n" +
         "    <thead>\n" +
         "    <tr>\n" +
         "        <th>宿舍编号</th>\n" +
@@ -180,7 +178,7 @@ function showRoomTable() {
         }
     });
     //通过输入框输入内容过滤表格
-    $('#findRoom').on('input propertychange', function() {
+    $('#findBy').on('input propertychange', function() {
         console.log( $(this).val());
         $('table tbody tr').hide()
             .filter(":contains('" + ($(this).val()) + "')")
@@ -350,12 +348,11 @@ function getDelRoomStuInfo(data) {
  * 未分配宿舍学生名单
  */
 function UnallocatedStudentTable() {
+    $('#findBy').val("");
     $("#unallocatedSyu").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
     //清空盒子
     $("#showData").empty();
-    // $("#showUnallocatedStuTable").css("display","block");
-    var tablehead = "<input type='text' id='findUnStu' placeholder='请输入查询内容'/>" +
-        "<table width='100%'>\n" +
+    var tablehead = "<table width='100%'>\n" +
         "    <thead>\n" +
         "    <tr>\n" +
         "        <th>学号</th>\n" +
@@ -398,7 +395,7 @@ function UnallocatedStudentTable() {
         }
     });
     //通过输入框输入内容过滤表格
-    $('#findUnStu').on('input propertychange', function() {
+    $('#findBy').on('input propertychange', function() {
         console.log( $(this).val());
         $('table tbody tr').hide()
             .filter(":contains('" + ($(this).val()) + "')")
@@ -470,11 +467,11 @@ function checkInOk(roomId,id) {
  * 访客列表
  */
 function showVisitorTable() {
+    $('#findBy').val("");
     $("#visitorInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
     //清空盒子
     $("#showData").empty();
-    var tablehead = "<input type='text' id='findVisit' placeholder='请输入查询内容'/>" +
-        "<table width='100%'>\n" +
+    var tablehead = "<table width='100%'>\n" +
         "    <thead>\n" +
         "    <tr>\n" +
         "        <th>姓名</th>\n" +
@@ -506,7 +503,7 @@ function showVisitorTable() {
         }
     });
     //通过输入框输入内容过滤表格
-    $('#findVisit').on('input propertychange', function() {
+    $('#findBy').on('input propertychange', function() {
         console.log( $(this).val());
         $('table tbody tr').hide()
             .filter(":contains('" + ($(this).val()) + "')")
@@ -743,6 +740,7 @@ function addMan(data) {
  * admin页面报修信息
  */
 function repairTable() {
+    $('#findBy').val("");
     $("#repairInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
     //清空盒子
     $("#showData").empty();
@@ -793,14 +791,14 @@ function repairTable() {
  * 管理员列表
  */
 function showManagerInfo(data) {
+    $('#findBy').val("");
     if (data != "root"){
         alert("权限不足！请联系银河领主小浩！");
     }else {
         $("#managerInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
         //清空盒子
         $("#showData").empty();
-        var tablehead = "<input type='text' id='findManager' placeholder='请输入查询内容'/>" +
-            "<table width='100%'>\n" +
+        var tablehead = "<table width='100%'>\n" +
             "    <thead>\n" +
             "    <tr>\n" +
             "        <th>姓名</th>\n" +
@@ -829,7 +827,7 @@ function showManagerInfo(data) {
             }
         });
         //通过输入框输入内容过滤表格
-        $('#findManager').on('input propertychange', function() {
+        $('#findBy').on('input propertychange', function() {
             console.log( $(this).val());
             $('table tbody tr').hide()
                 .filter(":contains('" + ($(this).val()) + "')")

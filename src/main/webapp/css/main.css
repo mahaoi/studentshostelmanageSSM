@@ -37,6 +37,8 @@ ul {
 #showData {
     float: left;
     width: 80%;
+    height: 80%;
+    overflow-y: auto;
 }
 
 #showRepair {
@@ -48,6 +50,7 @@ ul {
     float:right;
     padding:5px;
     margin-top: -7px;
+    overflow-y: auto;
 }
 
 #perInfo {

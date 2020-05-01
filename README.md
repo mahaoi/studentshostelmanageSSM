@@ -1,4 +1,4 @@
-# studentshostelmanageSSM
+# 学生宿舍管理系统
 - jquer3.3.1
 - Tomcat8.5.12
 - maven3.3.9
