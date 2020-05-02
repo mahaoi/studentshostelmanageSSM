@@ -37,7 +37,7 @@
                 <i class="fa fa-check"></i>
             </button>
         </div>
-        <a href="javascript:" class="pass-forgot">忘记密码？</a>
+        <a href="javascript:" class="pass-forgot" id="forgetPass">忘记密码？</a>
     </div>
 
     <div class="overbox">

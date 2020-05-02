@@ -170,4 +170,7 @@ $(function() {
       }
    });
 
+   $("#forgetPass").click(function () {
+      alert("煎饼果子(ฅ´ω`ฅ)");
+   });
 });

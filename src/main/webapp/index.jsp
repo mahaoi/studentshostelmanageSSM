@@ -43,6 +43,9 @@
         </a>
         <div id="perInfo">
             <a>
+                <iframe width="450" scrolling="no" height="18" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=1&icon=1&wind=1&num=1&site=12"></iframe>
+            </a>
+            <a>
                 <button id="adminName">你好：<%=request.getSession().getAttribute("user") %></button>
             </a>
             <a>
