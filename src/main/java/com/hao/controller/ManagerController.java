@@ -20,6 +20,9 @@ import javax.servlet.http.HttpSession;
 @ResponseBody
 public class ManagerController {
 
+    final String SUCCESS = "0";
+    final String FAIL = "1";
+
     @Autowired
     private ManagerService managerService;
 
@@ -30,19 +33,18 @@ public class ManagerController {
         ManagerInfo manager = managerService.findManager(managerInfo);
         if (manager != null){
             session.setAttribute("user",manager.getUsername());
-            return "0";
+            return SUCCESS;
         }
-        return "1";
+        return FAIL;
     }
 
     @RequestMapping("/log")
     public String loginPassTest(ManagerInfo managerInfo){
-        //0：成功  1：失败
         ManagerInfo manager = managerService.testOldPass(managerInfo);
         if ((manager.getPassword()).equals(managerInfo.getPassword())){
-            return "0";
+            return SUCCESS;
         }
-        return "1";
+        return FAIL;
     }
 
     @RequestMapping("/add")

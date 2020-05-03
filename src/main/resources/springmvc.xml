@@ -40,7 +40,7 @@
             <mvc:exclude-mapping path="/**/*.png"/>
             <mvc:exclude-mapping path="/**/*.jpg"/>
             <mvc:exclude-mapping path="/**/*.mp3"/>
-            <bean class="com.hao.intercept.logIntercept"></bean>
+            <bean class="com.hao.intercept.LogIntercept"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
 

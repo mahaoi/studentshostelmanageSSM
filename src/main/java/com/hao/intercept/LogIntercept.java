@@ -11,13 +11,12 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0
  * @date 2020/4/1 15:34
  */
-public class logIntercept implements HandlerInterceptor {
+public class LogIntercept implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 获取请求的URL
         String url = request.getRequestURI();
-//        System.out.println(url);
-        // 注意：一些静态文件不能拦截，否则会死循环，知道内存耗尽
+        // 一些静态文件不能拦截，否则会死循环，知道内存耗尽
         if (url.indexOf("login") >= 0 || url.indexOf("logout") >= 0) {
             return true;
         }
@@ -30,11 +29,8 @@ public class logIntercept implements HandlerInterceptor {
         if (obj != null) {
             return true;
         }
-        // 不符合条件的，跳转到登录界面
-        // request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+        //不符合条件的，跳转到登录界面
         response.sendRedirect("/login.jsp");
-
-//        request.getRequestDispatcher("/login.jsp").forward(request, response);
         return false;
     }
 

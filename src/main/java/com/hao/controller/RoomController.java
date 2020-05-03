@@ -26,6 +26,9 @@ import java.util.stream.Collectors;
 @ResponseBody
 public class RoomController {
 
+    final String SUCCESS = "0";
+    final String FAIL = "1";
+
     @Autowired
     private RoomService roomService;
 
@@ -76,23 +79,21 @@ public class RoomController {
 
     @RequestMapping("/login")
     public String loginRoom(RoomInfo roomInfo, HttpSession session){
-        //0：登陆成功  1：登陆失败
         RoomInfo room = roomService.findRoom(roomInfo);
         if (room != null){
             session.setAttribute("room",room.getRoomid());
-            return "0";
+            return SUCCESS;
         }
-        return "1";
+        return FAIL;
     }
 
     @RequestMapping("/log")
     public String oldPassTest(RoomInfo roomInfo){
-        //0：成功  1：失败
         RoomInfo room = roomService.findRoom(roomInfo);
         if (room != null){
-            return "0";
+            return SUCCESS;
         }
-        return "1";
+        return FAIL;
     }
 
     @RequestMapping("/upUserPass")

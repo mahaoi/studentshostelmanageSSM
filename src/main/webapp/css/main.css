@@ -48,7 +48,6 @@ ul {
     float:right;
     padding:5px;
     margin-top: -7px;
-    overflow-y: auto;
 }
 
 #perInfo {
@@ -71,4 +70,9 @@ table thead, tbody tr {
 table thead {
     width: calc( 100% - 1em )
 }
-table thead th{ background:#ccc;}
+
+table thead th{ background: #cccccc;}
+
+table tr:nth-child(odd){
+    background: #9af0fa;
+}
