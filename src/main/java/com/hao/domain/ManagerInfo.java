@@ -1,5 +1,7 @@
 package com.hao.domain;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -7,25 +9,16 @@ import java.io.Serializable;
  * @version 1.0
  * @date 2020/4/1 16:19
  */
+@Data
 public class ManagerInfo implements Serializable {
+    /**
+     * 用户名
+     */
     private String username;
+    /**
+     * 密码
+     */
     private String password;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public String toString() {

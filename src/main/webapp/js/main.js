@@ -478,10 +478,12 @@ function showVisitorTable() {
     var tablehead = "<table width='100%'>\n" +
         "    <thead>\n" +
         "    <tr>\n" +
-        "        <th>姓名</th>\n" +
-        "        <th>电话</th>\n" +
-        "        <th>时间</th>\n" +
-        "        <th>备注</th>\n" +
+        "        <th>来访者姓名</th>\n" +
+        "        <th>来访者电话</th>\n" +
+        "        <th>来访时间</th>\n" +
+        "        <th>被访者姓名</th>\n" +
+        "        <th>被访者宿舍</th>\n" +
+        "        <th>来访原由</th>\n" +
         "    </tr>\n" +
         "    </thead>\n" +
         "    <tbody id=\"visitList\">\n" +
@@ -499,6 +501,8 @@ function showVisitorTable() {
                 var trs = "<tr><td>" + value.visitName + "</td>" +
                     "<td>" + value.visitPhone + "</td>" +
                     "<td>" + timestampToTime(value.visitTime) + "</td>" +
+                    "<td>" + value.stuName + "</td>" +
+                    "<td>" + value.stuRoom + "</td>" +
                     "<td>" + value.visitRemarks +"</td></tr>";
                 $("#visitList").append(trs);
                 //设置文本居中
@@ -522,19 +526,27 @@ function addVisit() {
     $("#showData").empty();
     var table = "<table>\n" +
         "    <tr>\n" +
-        "        <td>姓名：</td>\n" +
+        "        <td>来访者姓名：</td>\n" +
         "        <td><input id='visitName'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
-        "        <td>电话：</td>\n" +
+        "        <td>来访者电话：</td>\n" +
         "        <td><input id='visitPhone'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
-        "        <td>备注：</td>\n" +
+        "        <td>被访者姓名：</td>\n" +
+        "        <td><input id='stuName'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>被访者宿舍：</td>\n" +
+        "        <td><input id='stuRoom'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td>来访原由：</td>\n" +
         "        <td><input id='visitRemarks'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
-        "        <td></td>\n" +
+        "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
         "        <td><input id='submit' type='submit' value='提交'/></td>\n" +
         "    </tr>\n" +
         "</table>";
@@ -547,6 +559,8 @@ function addVisit() {
             data : {
                 visitName : $("#visitName").val(),
                 visitPhone : $("#visitPhone").val(),
+                stuName : $("#stuName").val(),
+                stuRoom : $("#stuRoom").val(),
                 visitRemarks : $("#visitRemarks").val()
             },
             success : function() {
@@ -591,7 +605,7 @@ function addStu() {
         "        <td><input id='stuPhone'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
-        "        <td></td>\n" +
+        "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
         "        <td><input id='submit' type='submit' value='提交'/></td>\n" +
         "    </tr>\n" +
         "</table>";
@@ -659,7 +673,7 @@ function addRoom() {
         "        <td><input id='roomRem'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
-        "        <td></td>\n" +
+        "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
         "        <td><input id='submit' type='submit' value='提交'/></td>\n" +
         "    </tr>\n" +
         "</table>";
@@ -711,7 +725,7 @@ function addMan(data) {
             "        <td><input id='pass' type='password'/></td>\n" +
             "    </tr>\n" +
             "    <tr>\n" +
-            "        <td></td>\n" +
+            "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
             "        <td><input id='submit' type='submit' value='提交'/></td>\n" +
             "    </tr>\n" +
             "</table>";
@@ -821,10 +835,12 @@ function showManagerInfo(data) {
             dataType : "json",
             success : function(result) {
                 $.each(result, function (n, value) {
-                    var trs = "<tr><td>" + value.username + "</td>" +
-                        "<td>" + value.password +"</td>" +
-                        "<td><button onclick='delMan("+value.username+")'>删除</button><td></tr>";
-                    $("#managerList").append(trs);
+                    if (value.username != 'root'){
+                        var trs = "<tr><td>" + value.username + "</td>" +
+                            "<td>" + value.password +"</td>" +
+                            "<td><button onclick='delMan("+value.username+")'>删除</button><td></tr>";
+                        $("#managerList").append(trs);
+                    }
                     //设置文本居中
                     $("th,td").css("text-align","center");
                 });

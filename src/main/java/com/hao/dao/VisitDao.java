@@ -24,6 +24,7 @@ public interface VisitDao {
      * @param visitor
      * @return
      */
-    @Insert("insert into visitorinfo (visitName,visitPhone,visitTime,visitRemarks) values (#{visitName},#{visitPhone},#{visitTime},#{visitRemarks})")
+    @Insert("insert into visitorinfo (visitName,visitPhone,visitTime,stuName,stuRoom,visitRemarks) " +
+            "values (#{visitName},#{visitPhone},#{visitTime},#{stuName},#{stuRoom},#{visitRemarks})")
     int insert(VisitorInfo visitor);
 }

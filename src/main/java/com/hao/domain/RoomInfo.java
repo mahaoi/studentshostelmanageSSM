@@ -1,6 +1,8 @@
 package com.hao.domain;
 
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @version 1.0
  * @date 2020/3/15 19:16
  */
+@Data
 public class RoomInfo implements Serializable {
     /**
      * 宿舍编号
@@ -25,38 +28,6 @@ public class RoomInfo implements Serializable {
      * 备注
      */
     private String remarks;
-
-    public String getRoomid() {
-        return roomid;
-    }
-
-    public void setRoomid(String roomid) {
-        this.roomid = roomid;
-    }
-
-    public Integer getRoomin() {
-        return roomin;
-    }
-
-    public void setRoomin(Integer roomin) {
-        this.roomin = roomin;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
 
     @Override
     public String toString() {

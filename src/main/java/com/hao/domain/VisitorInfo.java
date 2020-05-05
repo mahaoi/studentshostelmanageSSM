@@ -1,5 +1,7 @@
 package com.hao.domain;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,52 +10,36 @@ import java.util.Date;
  * @version 1.0
  * @date 2020/3/30 12:40
  */
+@Data
 public class VisitorInfo implements Serializable {
+    /**
+     * id
+     */
     private Integer visitId;
+    /**
+     * 来访者姓名
+     */
     private String visitName;
+    /**
+     * 来访者电话
+     */
     private String visitPhone;
+    /**
+     * 来访时间
+     */
     private Date visitTime;
+    /**
+     * 被访者姓名
+     */
+    private String stuName;
+    /**
+     * 被访者宿舍
+     */
+    private String stuRoom;
+    /**
+     * 来访原由
+     */
     private String visitRemarks;
-
-    public Integer getVisitId() {
-        return visitId;
-    }
-
-    public void setVisitId(Integer visitId) {
-        this.visitId = visitId;
-    }
-
-    public String getVisitName() {
-        return visitName;
-    }
-
-    public void setVisitName(String visitName) {
-        this.visitName = visitName;
-    }
-
-    public String getVisitPhone() {
-        return visitPhone;
-    }
-
-    public void setVisitPhone(String visitPhone) {
-        this.visitPhone = visitPhone;
-    }
-
-    public Date getVisitTime() {
-        return visitTime;
-    }
-
-    public void setVisitTime(Date visitTime) {
-        this.visitTime = visitTime;
-    }
-
-    public String getVisitRemarks() {
-        return visitRemarks;
-    }
-
-    public void setVisitRemarks(String visitRemarks) {
-        this.visitRemarks = visitRemarks;
-    }
 
     @Override
     public String toString() {

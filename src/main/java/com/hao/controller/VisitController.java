@@ -40,12 +40,14 @@ public class VisitController {
      * @param visitRemarks
      */
     @RequestMapping("/add")
-    public void add(String visitName,String visitPhone,String visitRemarks){
+    public void add(String visitName,String visitPhone,String stuName,String stuRoom,String visitRemarks){
         Date date = new Date();
         VisitorInfo visitor = new VisitorInfo();
         visitor.setVisitName(visitName);
         visitor.setVisitPhone(visitPhone);
         visitor.setVisitTime(date);
+        visitor.setStuName(stuName);
+        visitor.setStuRoom(stuRoom);
         visitor.setVisitRemarks(visitRemarks);
         visitService.insert(visitor);
     }

@@ -1,5 +1,7 @@
 package com.hao.domain;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,61 +10,32 @@ import java.util.Date;
  * @version 1.0
  * @date 2020/4/2 16:32
  */
+@Data
 public class Repair implements Serializable {
+    /**
+     * 报修id
+     */
     private Integer repairId;
+    /**
+     * 报修名称
+     */
     private String repairName;
+    /**
+     * 报修时间
+     */
     private Date repairTime;
+    /**
+     * 报修内容
+     */
     private String repairText;
+    /**
+     * 报修结束时间
+     */
     private Date endTime;
+    /**
+     * 报修状态
+     */
     private String repairState;
-
-    public Integer getRepairId() {
-        return repairId;
-    }
-
-    public void setRepairId(Integer repairId) {
-        this.repairId = repairId;
-    }
-
-    public String getRepairName() {
-        return repairName;
-    }
-
-    public void setRepairName(String repairName) {
-        this.repairName = repairName;
-    }
-
-    public Date getRepairTime() {
-        return repairTime;
-    }
-
-    public void setRepairTime(Date repairTime) {
-        this.repairTime = repairTime;
-    }
-
-    public String getRepairText() {
-        return repairText;
-    }
-
-    public void setRepairText(String repairText) {
-        this.repairText = repairText;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public String getRepairState() {
-        return repairState;
-    }
-
-    public void setRepairState(String repairState) {
-        this.repairState = repairState;
-    }
 
     @Override
     public String toString() {
