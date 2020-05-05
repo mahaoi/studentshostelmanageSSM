@@ -48,7 +48,7 @@ function showStudentTable() {
                     "<td>" + value.classes + "</td>" +
                     "<td>" + value.phone + "</td>" + state +
                     "<td>" + roomid + "</td>" +
-                    "<td><button onclick='up("+value.id+")'>换宿</button><button onclick='del("+value.id+")'>删除</button></td></tr>";
+                    "<td><button onclick='up(\""+value.id+"\",\""+roomid+"\")'>换宿</button><button onclick='del("+value.id+")'>删除</button></td></tr>";
                 $("#stulist").append(trs);
                 //设置文本居中
                 $("th,td").css("text-align","center");
@@ -82,7 +82,11 @@ function del(id) {
 /**
  * 学生换宿
  */
-function up(id) {
+function up(id,roomid) {
+    if (roomid=="NULL"){
+        alert("请先为该学生分配宿舍！！");
+        return
+    }
     showTanChuang();
     var dia = document.getElementById('diaStu');
     //清楚无用子节点
@@ -766,7 +770,7 @@ function repairTable() {
         success : function(result) {
             console.log(result);
             $.each(result, function (n, value) {
-                var state = "<td style='color: aqua'>已完成</td>";
+                var state = "<td style='color: #8734ff'>已完成</td>";
                 var endTime = value.endTime;
                 if (value.repairState == "1"){
                     state = "<td style='color: red'>报修中</td>";
