@@ -20,7 +20,8 @@ public interface RepairService extends BaseService<Repair> {
 
     /**
      * 修改状态
-     * @param repair
+     * @param repairId
+     * @param repairState
      */
-    void upState(Repair repair);
+    void upState(String repairId,String repairState);
 }

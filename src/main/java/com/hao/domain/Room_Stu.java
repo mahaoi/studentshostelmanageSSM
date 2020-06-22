@@ -24,15 +24,8 @@ public class Room_Stu implements Serializable {
      * 学生id
      */
     private String id;
+    /**
+     * 宿舍学生list
+     */
     private List<StudentInfo> studentInfos;
-
-    @Override
-    public String toString() {
-        return "Room_Stu{" +
-                "rsid=" + rsid +
-                ", roomid='" + roomid + '\'' +
-                ", id='" + id + '\'' +
-                ", studentInfos=" + studentInfos +
-                '}';
-    }
 }

@@ -112,10 +112,10 @@
                 </thead>
                 <tfoot align="center">
                     <tr><th colspan="4">--------------------------------------------------</th></tr>
-                    <tr><td></td><td></td><td></td><td><a id="ok" style="color: aqua">确定</a></td></tr>
+                    <tr><td><a id="ok" style="color: aqua">确定</a></td></tr>
                     <tr><th colspan="4">============================</th></tr>
                 </tfoot>
-                <tbody align="center" id="roomInfoBody"></tbody>
+                <tbody align="center" id="roomInfoBody" style="height: auto;overflow-y: visible"></tbody>
             </table>
         </div>
     </div>

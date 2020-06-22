@@ -71,8 +71,9 @@ table thead {
     width: calc( 100% - 1em )
 }
 
-table thead th{ background: #cccccc;}
+/*隔行变色，不是很好看o.0*/
+/*table thead th{ background: #cccccc;}*/
 
-table tr:nth-child(odd){
-    background: #9af0fa;
-}
+/*table tr:nth-child(odd){*/
+/*    background: #9af0fa;*/
+/*}*/

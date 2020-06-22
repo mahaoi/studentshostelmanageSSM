@@ -36,16 +36,4 @@ public class Repair implements Serializable {
      * 报修状态
      */
     private String repairState;
-
-    @Override
-    public String toString() {
-        return "Repair{" +
-                "repairId=" + repairId +
-                ", repairName='" + repairName + '\'' +
-                ", repairTime=" + repairTime +
-                ", repairText='" + repairText + '\'' +
-                ", endTime=" + endTime +
-                ", repairState='" + repairState + '\'' +
-                '}';
-    }
 }

@@ -39,17 +39,4 @@ public class StudentInfo implements Serializable {
      * 状态(0代表已分配)
      */
     private String state;
-
-    @Override
-    public String toString() {
-        return "StudentInfo{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", sex='" + sex + '\'' +
-                ", major='" + major + '\'' +
-                ", classes='" + classes + '\'' +
-                ", phone='" + phone + '\'' +
-                ", state='" + state + '\'' +
-                '}';
-    }
 }

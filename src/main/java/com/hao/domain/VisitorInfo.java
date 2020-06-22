@@ -40,15 +40,4 @@ public class VisitorInfo implements Serializable {
      * 来访原由
      */
     private String visitRemarks;
-
-    @Override
-    public String toString() {
-        return "VisitorInfo{" +
-                "visitId=" + visitId +
-                ", visitName='" + visitName + '\'' +
-                ", visitPhone='" + visitPhone + '\'' +
-                ", visitTime=" + visitTime +
-                ", visitRemarks='" + visitRemarks + '\'' +
-                '}';
-    }
 }

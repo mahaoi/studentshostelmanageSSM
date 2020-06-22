@@ -28,14 +28,4 @@ public class RoomInfo implements Serializable {
      * 备注
      */
     private String remarks;
-
-    @Override
-    public String toString() {
-        return "RoomInfo{" +
-                "roomid='" + roomid + '\'' +
-                ", roomin=" + roomin +
-                ", password='" + password + '\'' +
-                ", remarks='" + remarks + '\'' +
-                '}';
-    }
 }

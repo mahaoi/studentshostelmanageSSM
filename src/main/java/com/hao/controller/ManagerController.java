@@ -29,7 +29,6 @@ public class ManagerController {
 
     @RequestMapping("/login")
     public String loginManager(ManagerInfo managerInfo, HttpSession session){
-        //0：登陆成功  1：登陆失败
         ManagerInfo manager = managerService.findManager(managerInfo);
         if (manager != null){
             session.setAttribute("user",manager.getUsername());

@@ -38,7 +38,6 @@ public class Room_StuController {
     @RequestMapping("/findIdList")
     public String findIdList(String roomId){
         List<Room_Stu> idList = room_stuService.findIdList(roomId);
-        System.out.println(idList);
         return JSON.toJSON(idList).toString();
     }
 

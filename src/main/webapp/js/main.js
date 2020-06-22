@@ -553,6 +553,17 @@ function addVisit() {
     $("#showData").append(table);
     $("tr,td").css("text-align","center");
     $("#submit").click(function () {
+        var meg = "";
+        $("input").each(function () {
+            if ($(this).val()==""){
+                meg = "1";
+                $(this).parent().css("border","1px solid red");
+            }
+        });
+        if (meg=="1"){
+            alert("输入信息不全！");
+            return;
+        }
         $.ajax({
             url : "vis/add",
             type : "post",
@@ -680,6 +691,17 @@ function addRoom() {
     $("#showData").append(table);
     $("tr,td").css("text-align","center");
     $("#submit").click(function () {
+        var meg = "";
+        $("input").each(function () {
+            if ($(this).val()==""){
+                meg = "1";
+                $(this).parent().css("border","1px solid red");
+            }
+        });
+        if (meg=="1"){
+            alert("输入信息不全！");
+            return;
+        }
         if ($("#roomIn").val() > 8 || $("#roomIn").val() == ""){
             alert("可入住人数设置错误");
             $("#roomIn").val("");
@@ -732,6 +754,17 @@ function addMan(data) {
         $("#showData").append(table);
         $("tr,td").css("text-align","center");
         $("#submit").click(function () {
+            var meg = "";
+            $("input").each(function () {
+                if ($(this).val()==""){
+                    meg = "1";
+                    $(this).parent().css("border","1px solid red");
+                }
+            });
+            if (meg=="1"){
+                alert("输入信息不全！");
+                return;
+            }
             $.ajax({
                 url : "sign/add",
                 type : "post",

@@ -30,7 +30,6 @@ public class RepairController {
 
     @RequestMapping("/addRepair")
     public void add(Repair repair){
-        repair.setRepairTime(new Date());
         repairService.insert(repair);
     }
 
@@ -41,10 +40,6 @@ public class RepairController {
 
     @RequestMapping("/upState")
     public void upState(String repairId,String repairState){
-        Repair repair = new Repair();
-        repair.setRepairId(Integer.valueOf(repairId));
-        repair.setEndTime(new Date());
-        repair.setRepairState(repairState);
-        repairService.upState(repair);
+        repairService.upState(repairId,repairState);
     }
 }

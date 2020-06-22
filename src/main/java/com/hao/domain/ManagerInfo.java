@@ -19,12 +19,4 @@ public class ManagerInfo implements Serializable {
      * 密码
      */
     private String password;
-
-    @Override
-    public String toString() {
-        return "ManagerInfo{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

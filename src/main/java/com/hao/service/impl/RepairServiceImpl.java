@@ -6,6 +6,7 @@ import com.hao.service.RepairService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +30,7 @@ public class RepairServiceImpl implements RepairService {
 
     @Override
     public int insert(Repair repair) {
+        repair.setRepairTime(new Date());
         return repairDao.insert(repair);
     }
 
@@ -38,7 +40,11 @@ public class RepairServiceImpl implements RepairService {
     }
 
     @Override
-    public void upState(Repair repair) {
+    public void upState(String repairId,String repairState) {
+        Repair repair = new Repair();
+        repair.setRepairId(Integer.valueOf(repairId));
+        repair.setEndTime(new Date());
+        repair.setRepairState(repairState);
         repairDao.upState(repair);
     }
 }
