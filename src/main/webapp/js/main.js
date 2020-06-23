@@ -527,23 +527,23 @@ function addVisit() {
     var table = "<table>\n" +
         "    <tr>\n" +
         "        <td>来访者姓名：</td>\n" +
-        "        <td><input id='visitName'/></td>\n" +
+        "        <td><input class='demo' id='visitName'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>来访者电话：</td>\n" +
-        "        <td><input id='visitPhone'/></td>\n" +
+        "        <td><input class='demo' id='visitPhone'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>被访者姓名：</td>\n" +
-        "        <td><input id='stuName'/></td>\n" +
+        "        <td><input class='demo' id='stuName'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>被访者宿舍：</td>\n" +
-        "        <td><input id='stuRoom'/></td>\n" +
+        "        <td><input class='demo' id='stuRoom'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>来访原由：</td>\n" +
-        "        <td><input id='visitRemarks'/></td>\n" +
+        "        <td><input class='demo' id='visitRemarks'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
@@ -554,7 +554,7 @@ function addVisit() {
     $("tr,td").css("text-align","center");
     $("#submit").click(function () {
         var meg = "";
-        $("input").each(function () {
+        $("input.demo").each(function () {
             if ($(this).val()==""){
                 meg = "1";
                 $(this).parent().css("border","1px solid red");
@@ -593,27 +593,27 @@ function addStu() {
     var table = "<table>\n" +
         "    <tr>\n" +
         "        <td>学号：</td>\n" +
-        "        <td><input id='stuId'/></td>\n" +
+        "        <td><input class='demo' id='stuId'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>姓名：</td>\n" +
-        "        <td><input id='stuName'/></td>\n" +
+        "        <td><input class='demo' id='stuName'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>性别：</td>\n" +
-        "        <td><input id='stuSex'/></td>\n" +
+        "        <td><input class='demo' id='stuSex'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>专业：</td>\n" +
-        "        <td><input id='stuMajor'/></td>\n" +
+        "        <td><input class='demo' id='stuMajor'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>班级：</td>\n" +
-        "        <td><input id='stuClasses'/></td>\n" +
+        "        <td><input class='demo' id='stuClasses'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>电话：</td>\n" +
-        "        <td><input id='stuPhone'/></td>\n" +
+        "        <td><input class='demo' id='stuPhone'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
@@ -624,7 +624,7 @@ function addStu() {
     $("tr,td").css("text-align","center");
     $("#submit").click(function () {
         var meg = "";
-        $("input").each(function () {
+        $("input.demo").each(function () {
             if ($(this).val()==""){
                 meg = "1";
                 $(this).parent().css("border","1px solid red");
@@ -669,19 +669,19 @@ function addRoom() {
     var table = "<table>\n" +
         "    <tr>\n" +
         "        <td>寝室编号：</td>\n" +
-        "        <td><input id='roomId'/></td>\n" +
+        "        <td><input class='demo' id='roomId'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>可入住人数：</td>\n" +
-        "        <td><input id='roomIn'/></td>\n" +
+        "        <td><input class='demo' id='roomIn'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>寝室密码：</td>\n" +
-        "        <td><input id='roomPass'/></td>\n" +
+        "        <td><input class='demo' id='roomPass'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td>备注：</td>\n" +
-        "        <td><input id='roomRem'/></td>\n" +
+        "        <td><input class='demo' id='roomRem'/></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
@@ -692,7 +692,7 @@ function addRoom() {
     $("tr,td").css("text-align","center");
     $("#submit").click(function () {
         var meg = "";
-        $("input").each(function () {
+        $("input.demo").each(function () {
             if ($(this).val()==""){
                 meg = "1";
                 $(this).parent().css("border","1px solid red");
@@ -740,11 +740,11 @@ function addMan(data) {
         var table = "<table>\n" +
             "    <tr>\n" +
             "        <td>用户名：</td>\n" +
-            "        <td><input id='userName'/></td>\n" +
+            "        <td><input class='demo' id='userName'/></td>\n" +
             "    </tr>\n" +
             "    <tr>\n" +
             "        <td>密码：</td>\n" +
-            "        <td><input id='pass' type='password'/></td>\n" +
+            "        <td><input class='demo' id='pass' type='password'/></td>\n" +
             "    </tr>\n" +
             "    <tr>\n" +
             "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
@@ -755,7 +755,7 @@ function addMan(data) {
         $("tr,td").css("text-align","center");
         $("#submit").click(function () {
             var meg = "";
-            $("input").each(function () {
+            $("input.demo").each(function () {
                 if ($(this).val()==""){
                     meg = "1";
                     $(this).parent().css("border","1px solid red");

@@ -71,6 +71,8 @@ table thead {
     width: calc( 100% - 1em )
 }
 
+.demo {}
+
 /*隔行变色，不是很好看o.0*/
 /*table thead th{ background: #cccccc;}*/
 

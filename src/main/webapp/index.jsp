@@ -23,10 +23,6 @@
             <img src="images/logo.png" style="width: 229px;height: 63.85px;"/>
         </a>
         <a>
-            <%--<iframe width="450" scrolling="no" height="18" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=1&color=%230070C0&icon=1&wind=1&num=2&site=12"></iframe>--%>
-        </a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a>
             <button id="addVisitor" onclick="addVisit()">来访登记</button>
         </a>
         <a>
@@ -39,7 +35,7 @@
             <button id="addMan" onclick="addMan('<%=request.getSession().getAttribute("user") %>')">管理员添加</button>
         </a>
         <a>
-            <input type='text' id='findBy' placeholder='请输入查询内容'/>
+            <input id='findBy' placeholder='请输入查询内容'/>
         </a>
         <div id="perInfo">
             <a>
