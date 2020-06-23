@@ -871,7 +871,7 @@ function showManagerInfo(data) {
                     if (value.username != 'root'){
                         var trs = "<tr><td>" + value.username + "</td>" +
                             "<td>" + value.password +"</td>" +
-                            "<td><button onclick='delMan("+value.username+")'>删除</button><td></tr>";
+                            "<td><button onclick='delMan(\""+value.username+"\")'>删除</button><td></tr>";
                         $("#managerList").append(trs);
                     }
                     //设置文本居中
