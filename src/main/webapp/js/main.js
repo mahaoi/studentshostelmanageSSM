@@ -879,6 +879,7 @@ function showManagerInfo(data) {
             "        <th>姓名</th>\n" +
             "        <th>密码</th>\n" +
             "        <th>操作</th>\n" +
+            "        <th>备注</th>\n" +
             "    </tr>\n" +
             "    </thead>\n" +
             "    <tbody id=\"managerList\">\n" +
@@ -893,9 +894,11 @@ function showManagerInfo(data) {
             success : function(result) {
                 $.each(result, function (n, value) {
                     if (value.username != 'root'){
-                        var trs = "<tr><td>" + value.username + "</td>" +
+                        var trs = "<tr>" +
+                            "<td>" + value.username + "</td>" +
                             "<td>" + value.password +"</td>" +
-                            "<td><button onclick='delMan(\""+value.username+"\")'>删除</button><td></tr>";
+                            "<td><button onclick='delMan(\""+value.username+"\")'>删除</button><td>" +
+                            "无</tr>";
                         $("#managerList").append(trs);
                     }
                     //设置文本居中
