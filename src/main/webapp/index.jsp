@@ -82,34 +82,38 @@
 <%--信息显示的盒子--%>
 <div id="section">
     <%--  显示logo  --%>
-    <div id="showData" style="display: block;"><img src="images/8.png" width="100%"/></div>
+    <div id="showData" style="display: block;">
+        <img src="images/0.png" width="100%"/>
+        <hr>
+        <h3>框架：SSM</h3>
+    </div>
     <div id="showRepair" style="display: block;"></div>
     <%--  宿舍详情弹窗  --%>
     <div class="wrap-box" id="dia" style="display: none;"><!--最外层包裹框，背景图片很鲜艳亮眼position:fixed-->
         <div class='login-box'><!--表单框部分position:fixed-->
-            <table border="0" style="margin-left: 60px;">
+            <table border="0" style="margin-left: 20px;">
                 <thead align="center">
-                    <tr><th colspan="4">============================</th></tr>
-                    <tr><th colspan="4">宿舍入住详情</th></tr>
-                    <tr><th colspan="4">============================</th></tr>
+                    <tr><th colspan="6">======================================</th></tr>
+                    <tr><th colspan="6">宿舍入住详情</th></tr>
+                    <tr><th colspan="6">======================================</th></tr>
                     <tr>
-                        <td id="roomId"></td>
+                        <td id="roomId" colspan="2"></td>
                         <td></td><td></td>
-                        <td id="roomIn"></td>
+                        <td id="roomIn" colspan="2"></td>
                     </tr>
-                    <tr><th colspan="4">--------------------------------------------------</th></tr>
+                    <tr><th colspan="6">------------------------------------------------------------</th></tr>
                     <tr>
-                        <td>学号</td>
-                        <td>专业</td>
+                        <td colspan="2">学号</td>
+                        <td colspan="2">专业</td>
                         <td>姓名</td>
                         <td>操作</td>
                     </tr>
-                    <tr><th colspan="4">--------------------------------------------------</th></tr>
+                    <tr><th colspan="6">------------------------------------------------------------</th></tr>
                 </thead>
                 <tfoot align="center">
-                    <tr><th colspan="4">--------------------------------------------------</th></tr>
+                    <tr><th colspan="6">------------------------------------------------------------</th></tr>
                     <tr><td><a id="ok" style="color: aqua">确定</a></td></tr>
-                    <tr><th colspan="4">============================</th></tr>
+                    <tr><th colspan="6">======================================</th></tr>
                 </tfoot>
                 <tbody align="center" id="roomInfoBody" style="height: auto;overflow-y: visible"></tbody>
             </table>
@@ -117,14 +121,14 @@
     </div>
     <%--  弹窗  --%>
     <div class="wrap-box" id="diaStu" style="display: none;"><!--最外层包裹框，背景图片很鲜艳亮眼position:fixed-->
-        <div class='login-box'><!--登录表单框部分position:fixed-->
+        <div class='login-box'>
             <select id="update" style="margin-left: 200px;"></select>
         </div>
     </div>
 </div>
 <%--下边版权信息--%>
 <div id="footer">
-    Copyright ? 2020 <a id="caiDan">果果妞妞</a> | 银河领主小浩
+    Copyright © 2020 By <a id="caiDan">果果妞妞</a> & 银河领主小浩. All rights reserved.
 </div>
 <script>
     $("#caiDan").focus(caiDan());
@@ -194,10 +198,10 @@
         background: rgba(0,0,0,0.5);
         z-index: 200;
         position: absolute;
-        top: 50%;
+        top: 200px;
         left: 50%;
         width: 500px;
-        height: 400px;
+        height: 635px;
         margin: -200px 0 0 -250px;
         border-radius: 10px;
         border-top-width: 10px;

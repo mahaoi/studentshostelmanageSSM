@@ -29,7 +29,7 @@ function showStudentTable() {
         type : "get",
         dataType : "json",
         success : function(result) {
-            console.log(result);
+            // console.log(result);
             $.each(result, function (n, value) {
                 var state = "";
                 if (value.state == '0'){
@@ -57,7 +57,7 @@ function showStudentTable() {
     });
     //通过输入框输入内容过滤表格
     $('#findBy').on('input propertychange', function() {
-        console.log( $(this).val());
+        // console.log( $(this).val());
         $('table tbody tr').hide()
             .filter(":contains('" + ($(this).val()) + "')")
             .show();
@@ -162,7 +162,7 @@ function showRoomTable() {
         type : "get",
         dataType : "json",
         success : function(result) {
-            console.log(result);
+            // console.log(result);
             $.each(result, function (n, value) {
                 // alert(n + ' ' + value);
                 if (value.remarks == "" || value.remarks == null){
@@ -183,7 +183,7 @@ function showRoomTable() {
     });
     //通过输入框输入内容过滤表格
     $('#findBy').on('input propertychange', function() {
-        console.log( $(this).val());
+        // console.log( $(this).val());
         $('table tbody tr').hide()
             .filter(":contains('" + ($(this).val()) + "')")
             .show();
@@ -216,7 +216,7 @@ function moreInfo(roomid) {
                 } else {
                     var students = value.studentInfos;
                     moreInfo2(students);
-                    console.log(students);
+                    // console.log(students);
                 }
             });
         },
@@ -227,8 +227,8 @@ function moreInfo(roomid) {
 }
 function moreInfo2(result) {
     $.each(result, function (n, value) {
-        var trs = "<tr><td>" + value.id + "</td>" +
-            "<td>" + value.major + "</td>" +
+        var trs = "<tr><td colspan='2'>" + value.id + "</td>" +
+            "<td colspan='2'>" + value.major + "</td>" +
             "<td>"+value.name+"</td>" +
             "<td><button onclick='removeStuToRoom("+value.id+")'>移除</button></td></tr>";
         $("#roomInfoBody").append(trs);
@@ -337,7 +337,7 @@ function getDelRoomStuInfo(data) {
         dataType : "json",
         success : function(result) {
             $.each(result, function (n, value) {
-                console.log(value.id);
+                // console.log(value.id);
                 upStuState("1",value.id);
             });
         },
@@ -382,7 +382,7 @@ function UnallocatedStudentTable() {
         },
         dataType : "json",
         success : function(result) {
-            console.log(result);
+            // console.log(result);
             $.each(result, function (n, value) {
                 var trs = "<tr><td>" + value.id + "</td>" +
                     "<td>" + value.name + "</td>" +
@@ -400,7 +400,7 @@ function UnallocatedStudentTable() {
     });
     //通过输入框输入内容过滤表格
     $('#findBy').on('input propertychange', function() {
-        console.log( $(this).val());
+        // console.log( $(this).val());
         $('table tbody tr').hide()
             .filter(":contains('" + ($(this).val()) + "')")
             .show();
@@ -496,7 +496,7 @@ function showVisitorTable() {
         type : "get",
         dataType : "json",
         success : function(result) {
-            console.log(result);
+            // console.log(result);
             $.each(result, function (n, value) {
                 var trs = "<tr><td>" + value.visitName + "</td>" +
                     "<td>" + value.visitPhone + "</td>" +
@@ -512,7 +512,7 @@ function showVisitorTable() {
     });
     //通过输入框输入内容过滤表格
     $('#findBy').on('input propertychange', function() {
-        console.log( $(this).val());
+        // console.log( $(this).val());
         $('table tbody tr').hide()
             .filter(":contains('" + ($(this).val()) + "')")
             .show();
@@ -525,6 +525,9 @@ function showVisitorTable() {
 function addVisit() {
     $("#showData").empty();
     var table = "<table>\n" +
+        "    <tr>\n" +
+        "        <td colspan='2'><hr></td>\n" +
+        "    </tr>\n" +
         "    <tr>\n" +
         "        <td>来访者姓名：</td>\n" +
         "        <td><input class='demo' id='visitName'/></td>\n" +
@@ -544,6 +547,9 @@ function addVisit() {
         "    <tr>\n" +
         "        <td>来访原由：</td>\n" +
         "        <td><input class='demo' id='visitRemarks'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td colspan='2'><hr></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
@@ -592,6 +598,9 @@ function addStu() {
     $("#showData").empty();
     var table = "<table>\n" +
         "    <tr>\n" +
+        "        <td colspan='2'><hr></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
         "        <td>学号：</td>\n" +
         "        <td><input class='demo' id='stuId'/></td>\n" +
         "    </tr>\n" +
@@ -614,6 +623,9 @@ function addStu() {
         "    <tr>\n" +
         "        <td>电话：</td>\n" +
         "        <td><input class='demo' id='stuPhone'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td colspan='2'><hr></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
@@ -668,6 +680,9 @@ function addRoom() {
     $("#showData").empty();
     var table = "<table>\n" +
         "    <tr>\n" +
+        "        <td colspan='2'><hr></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
         "        <td>寝室编号：</td>\n" +
         "        <td><input class='demo' id='roomId'/></td>\n" +
         "    </tr>\n" +
@@ -682,6 +697,9 @@ function addRoom() {
         "    <tr>\n" +
         "        <td>备注：</td>\n" +
         "        <td><input class='demo' id='roomRem'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td colspan='2'><hr></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
@@ -734,10 +752,13 @@ function addRoom() {
  */
 function addMan(data) {
     if (data != "root"){
-        alert("权限不足！请联系银河领主小浩！");
+        alert("不是吧,阿sir,您竟然没有权限！");
     }else {
         $("#showData").empty();
         var table = "<table>\n" +
+            "    <tr>\n" +
+            "        <td colspan='2'><hr></td>\n" +
+            "    </tr>\n" +
             "    <tr>\n" +
             "        <td>用户名：</td>\n" +
             "        <td><input class='demo' id='userName'/></td>\n" +
@@ -745,6 +766,9 @@ function addMan(data) {
             "    <tr>\n" +
             "        <td>密码：</td>\n" +
             "        <td><input class='demo' id='pass' type='password'/></td>\n" +
+            "    </tr>\n" +
+            "    <tr>\n" +
+            "        <td colspan='2'><hr></td>\n" +
             "    </tr>\n" +
             "    <tr>\n" +
             "        <td><input type='submit' onclick='showLogo()' value='取消'/></td>\n" +
@@ -815,7 +839,7 @@ function repairTable() {
         type : "get",
         dataType : "json",
         success : function(result) {
-            console.log(result);
+            // console.log(result);
             $.each(result, function (n, value) {
                 var state = "<td style='color: #8734ff'>已完成</td>";
                 var endTime = value.endTime;
@@ -844,7 +868,7 @@ function repairTable() {
 function showManagerInfo(data) {
     $('#findBy').val("");
     if (data != "root"){
-        alert("权限不足！请联系银河领主小浩！");
+        alert("不是吧,阿sir,您竟然没有权限！");
     }else {
         $("#managerInfo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
         //清空盒子
@@ -881,7 +905,7 @@ function showManagerInfo(data) {
         });
         //通过输入框输入内容过滤表格
         $('#findBy').on('input propertychange', function() {
-            console.log( $(this).val());
+            // console.log( $(this).val());
             $('table tbody tr').hide()
                 .filter(":contains('" + ($(this).val()) + "')")
                 .show();
@@ -952,7 +976,7 @@ function Info(roomid) {
         },
         dataType : "json",
         success : function(result) {
-            console.log(result);
+            // console.log(result);
             $.each(result, function (n, value) {
                 $.each(value.studentInfos,function (o,p) {
                     var trs = "<tr><td>" + value.id + "</td>" +
@@ -1025,7 +1049,7 @@ function findOldRepair(repairName) {
         },
         dataType : "json",
         success : function(result) {
-            console.log(result);
+            // console.log(result);
             $.each(result, function (n, value) {
                 var state = "<td style='color: aqua'>已完成</td>";
                 var endTime = value.endTime;

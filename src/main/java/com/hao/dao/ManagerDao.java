@@ -26,7 +26,7 @@ public interface ManagerDao {
      * @param managerInfo
      * @return
      */
-    @Select("select * from managerinfo where username = #{username} and password = #{password}")
+    @Select("select * from managerinfo where username = #{username} and password = #{password} limit 1")
     ManagerInfo findManager(ManagerInfo managerInfo);
 
     /**
