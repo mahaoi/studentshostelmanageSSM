@@ -83,9 +83,17 @@
 <div id="section">
     <%--  显示logo  --%>
     <div id="showData" style="display: block;">
-        <img src="images/0.png" width="100%"/>
-        <hr>
-        <h3>框架：SSM</h3>
+        <img src="images/0.png" width="100%"/><br><br><br><br><br><hr>
+        <div>
+            <ul style="list-style-type:square">
+                <li>框架：SSM</li>
+                <li>服务器环境：windows 10</li>
+                <li>数据库版本：5.1.17</li>
+                <li>maven：3.3.9</li>
+                <li>tomcat：8.5.12</li>
+                <li>github：</li>
+            </ul>
+        </div>
     </div>
     <div id="showRepair" style="display: block;"></div>
     <%--  宿舍详情弹窗  --%>
