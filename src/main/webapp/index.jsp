@@ -1,13 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<%--
-  Created by IntelliJ IDEA.
-  User: guoguo
-  Date: 2020/3/9
-  Time: 10:30
-  To change this template use File | Settings | File Templates.
---%>
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="js/main.js"></script>

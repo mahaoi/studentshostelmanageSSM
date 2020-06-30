@@ -106,7 +106,7 @@ function up(id,roomid) {
             alert("error");
         }
     });
-    $("#diaStu").append("<button id='checkInOk'>确定</button><button id='checkInNo'>取消</button>");
+    $("#diaStu").append("<br><br><br><hr><div style='text-align: center'><button id='checkInOk'>确定</button><button id='checkInNo'>取消</button></div>");
     $("#checkInNo").click(function () {
         dia.style.display = 'none';
     });
@@ -252,7 +252,7 @@ function upRoom(roomid,ining) {
         $("#update").append(str);
     }
 
-    $("#diaStu").append("<button id='okBtu'>确定</button><button id='unBtu'>取消</button>");
+    $("#diaStu").append("<br><br><br><hr><div style='text-align: center'><button id='okBtu'>确定</button><button id='unBtu'>取消</button></div>");
     //获取选择的值
     $("#update").change(function(){
         $("#okBtu").click(function () {
@@ -430,7 +430,7 @@ function checkIn(id) {
             alert("error");
         }
     });
-    $("#diaStu").append("<button id='checkInOk'>提交</button><button id='checkInNo'>取消</button>");
+    $("#diaStu").append("<br><br><br><hr><div style='text-align: center'><button id='checkInOk'>提交</button><button id='checkInNo'>取消</button></div>");
     $("#checkInNo").click(function () {
         dia.style.display = 'none';
     });
@@ -1129,6 +1129,9 @@ function upAdminPass(adminName) {
     $("#showData").empty();
     var table = "<table>\n" +
         "    <tr>\n" +
+        "        <td colspan='2'><hr></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
         "        <td>旧密码：</td>\n" +
         "        <td><input type='password' id='oldPass'/></td>\n" +
         "    </tr>\n" +
@@ -1139,6 +1142,9 @@ function upAdminPass(adminName) {
         "    <tr>\n" +
         "        <td>确认密码：</td>\n" +
         "        <td><input type='password' id='newPass2'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td colspan='2'><hr></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td><a href='index.jsp'>取消</a></td>\n" +
@@ -1203,6 +1209,9 @@ function upUserPass(roomid) {
     $("#showData").empty();
     var table = "<table>\n" +
         "    <tr>\n" +
+        "        <td colspan='2'><hr></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
         "        <td>旧密码：</td>\n" +
         "        <td><input type='password' id='oldPas'/></td>\n" +
         "    </tr>\n" +
@@ -1213,6 +1222,9 @@ function upUserPass(roomid) {
         "    <tr>\n" +
         "        <td>确认密码：</td>\n" +
         "        <td><input type='password' id='newPas2'/></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "        <td colspan='2'><hr></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "        <td><a href='userIndex.jsp'>取消</a></td>\n" +

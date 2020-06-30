@@ -28,9 +28,6 @@
         <a>
             <img src="images/logo.png" style="width: 229px;height: 63.85px;"/>
         </a>
-        <a>
-<%--            <iframe width="450" scrolling="no" height="18" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=1&color=%230070C0&icon=1&wind=1&num=2&site=12"></iframe>--%>
-        </a>
         <div id="perInfo">
             <a>
                 <button id="userName">你好：<%=request.getSession().getAttribute("room") %></button>
@@ -61,7 +58,7 @@
 <%--信息显示的盒子--%>
 <div id="section">
     <%--  显示logo  --%>
-    <div id="showData" style="display: block;"><img src="images/8.png" width="100%"/></div>
+    <div id="showData" style="display: block;"><img src="images/0.png" width="100%"/></div>
     <div id="showRepair" style="display: block;">
         <a style="color: red">报修信息提交处</a>
         <textarea cols="100" rows="6" style="OVERFLOW : hidden"></textarea>
@@ -70,7 +67,7 @@
 </div>
 <%--下边版权信息--%>
 <div id="footer">
-    Copyright ? 2020 <a id="caiDan">果果妞妞</a>
+    Copyright © 2020 By <a id="caiDan">果果妞妞</a> & 银河领主小浩. All rights reserved.
 </div>
 <script>
     $("#caiDan").focus(caiDan());
