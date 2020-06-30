@@ -91,7 +91,7 @@
                 <li>数据库版本：5.1.17</li>
                 <li>maven：3.3.9</li>
                 <li>tomcat：8.5.12</li>
-                <li>github：</li>
+                <li>GitHub：<a href="" style="text-decoration:none;">github</a></li>
             </ul>
         </div>
     </div>
