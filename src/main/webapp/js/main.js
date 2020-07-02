@@ -1321,7 +1321,17 @@ function timestampToTime(timestamp) {
  */
 function showLogo() {
     $("#logo").addClass("clkFontColor").parent().siblings().children().removeClass("clkFontColor");
-    $("#showData").empty().append("<img src=\"images/8.png\" width=\"100%\"/>");
+    $("#showData").empty().append("<img src=\"images/8.png\" width=\"100%\"/><br><br><br><br><br><hr>" +
+        "<div>\n" +
+        "            <ul style=\"list-style-type:square\">\n" +
+        "                <li>框架：SSM</li>\n" +
+        "                <li>服务器环境：windows 10</li>\n" +
+        "                <li>数据库版本：5.1.17</li>\n" +
+        "                <li>maven：3.3.9</li>\n" +
+        "                <li>tomcat：8.5.12</li>\n" +
+        "                <li>GitHub：<a href=\"https://github.com/mahaoi/studentshostelmanageSSM\" style=\"text-decoration:none;\">github</a></li>\n" +
+        "            </ul>\n" +
+        "        </div>");
 }
 
 
