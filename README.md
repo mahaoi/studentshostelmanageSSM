@@ -1,16 +1,9 @@
 # 学生宿舍管理系统
-- jquer3.3.1
-- Tomcat8.5.12
-- maven3.3.9
-- ssm
-- mysql5.1.17
+- 框架：SSM
+- 服务器环境：windows 10
+- 数据库版本：5.1.17
+- maven：3.3.9
+- tomcat：8.5.12
+- 首页：[点击跳转](http://39.99.154.0:8080/studentshostelmanageSSM/)
 
-# 登录页面
 
-### 管理员
-
-![image-20200423111705982](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20200423111705982.png)
-
-### 用户(点击+号)
-
-![image-20200423111747586](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20200423111747586.png)
