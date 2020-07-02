@@ -1,5 +1,6 @@
 package com.hao.service.impl;
 
+import cn.hutool.crypto.digest.DigestUtil;
 import com.hao.dao.ManagerDao;
 import com.hao.domain.ManagerInfo;
 import com.hao.service.ManagerService;
@@ -26,12 +27,13 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public ManagerInfo findManager(ManagerInfo managerInfo) {
+        managerInfo.setPassword(DigestUtil.md5Hex(managerInfo.getPassword()));
         return managerDao.findManager(managerInfo);
     }
 
     @Override
     public void update(String username, String password) {
-        managerDao.update(username,password);
+        managerDao.update(username,DigestUtil.md5Hex(password));
     }
 
     @Override
@@ -41,6 +43,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public int insert(ManagerInfo managerInfo) {
+        managerInfo.setPassword(DigestUtil.md5Hex(managerInfo.getPassword()));
         return managerDao.insert(managerInfo);
     }
 

@@ -1,5 +1,6 @@
 package com.hao.controller;
 
+import cn.hutool.crypto.digest.DigestUtil;
 import com.alibaba.fastjson.JSON;
 import com.hao.domain.ManagerInfo;
 import com.hao.service.ManagerService;
@@ -40,7 +41,7 @@ public class ManagerController {
     @RequestMapping("/log")
     public String loginPassTest(ManagerInfo managerInfo){
         ManagerInfo manager = managerService.testOldPass(managerInfo);
-        if ((manager.getPassword()).equals(managerInfo.getPassword())){
+        if ((manager.getPassword()).equals(DigestUtil.md5Hex(managerInfo.getPassword()))){
             return SUCCESS;
         }
         return FAIL;
