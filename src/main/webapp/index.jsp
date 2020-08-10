@@ -3,6 +3,7 @@
 <html>
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="js/main.js"></script>
     <link type="text/css" rel="styleSheet"  href="css/main.css" />
     <title>Students Hostel Manage</title>
